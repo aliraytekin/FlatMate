@@ -9,5 +9,5 @@ class Offer < ApplicationRecord
 
   PROPERTY_TYPES = ["Apartment", "House", "Studio", "Villa", "Cabin"]
   validates :property_type, inclusion: {in: PROPERTY_TYPES}
-
+  
 end
