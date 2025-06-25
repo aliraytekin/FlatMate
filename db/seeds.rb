@@ -1,8 +1,7 @@
 require 'open-uri'
-require "pexels"
 
 puts "Cleaning database"
-Flat.destroy_all
+Offer.destroy_all
 User.destroy_all
 
 hosts = []
@@ -64,39 +63,20 @@ ADDRESSES = [
   "Old City, Jerusalem, Israel"
 ]
 
-client = Pexels::Client.new("LjpjMh5JS2b0EK3XJzv36w0TC0zDYUPI5bk7xRR38O58kjCzCwj5SBOU")
-
-property_type_images = {}
-
-Flat::PROPERTY_TYPES.each do |property_type|
-  photos = client.photos.search(property_type, per_page: 10)
-  images_url = photos.map { |photo| photo.src["original"] }
-  property_type_images[property_type] = images_url
-end
-
 20.times do
   property_type = Flat::PROPERTY_TYPES.sample
 
-  flat = Flat.new(
+  flat = Offer.new(
     title: TITLES.sample,
     address: ADDRESSES.sample,
-    description: Faker::Lorem.paragraph(sentence_count: 3),
+    description: Faker::Lorem.paragraph(sentence_count: 4),
     number_of_bathrooms: rand(1..3),
     number_of_beds: rand(1..5),
     guests_limit: rand(1..7),
     property_type: property_type,
-    available: true,
     price_per_night: rand(50..254),
     user: hosts.sample
   )
-
-  5.times do
-    random_image = property_type_images[property_type].sample
-    puts "Downloading image #{random_image}"
-    file = URI.open(random_image)
-    flat.photos.attach(io: file, filename: "flat_#{rand(1000)}.jpg", content_type: "image/jpg")
-  end
-
   flat.save!
 end
 
