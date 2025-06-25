@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'faker'
 
 puts "Cleaning database"
 Offer.destroy_all
@@ -8,8 +9,6 @@ hosts = []
 
 15.times do
   hosts << User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: "123456"
   )
@@ -64,7 +63,7 @@ ADDRESSES = [
 ]
 
 20.times do
-  property_type = Flat::PROPERTY_TYPES.sample
+  property_type = Offer::PROPERTY_TYPES.sample
 
   flat = Offer.new(
     title: TITLES.sample,
