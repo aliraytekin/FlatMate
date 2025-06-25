@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'offers/index'
+  get 'offers/show'
+  get 'offers/new'
+  get 'offers/create'
+  get 'offers/edit'
+  get 'offers/update'
+  get 'offers/destroy'
   devise_for :users
   root to: "pages#home"
 
