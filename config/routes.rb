@@ -6,12 +6,14 @@ Rails.application.routes.draw do
   get 'offers/edit'
   get 'offers/update'
   get 'offers/destroy'
-  devise_for :users
   root to: "pages#home"
 
   resources :offers do
     resources :bookings, only: [:new, :create]
   end
+
   resources :bookings, only: [:index, :show, :edit, :update]
-  
+
+  devise_for :users
+
 end
