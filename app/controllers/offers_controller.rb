@@ -2,6 +2,7 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_offer, only: %i[show update destroy]
 
+
   def index
     @offers = Offer.all
   end
@@ -29,7 +30,7 @@ class OffersController < ApplicationController
   end
 
   def update
-    @offer = Offer.find(params[:id])
+
     if @offer.update(offers_params)
       redirect_to @offer
     else
