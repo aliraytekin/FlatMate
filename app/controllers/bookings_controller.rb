@@ -1,0 +1,41 @@
+class BookingsController < ApplicationController
+  before_action :set_offer, only: %i[new create]
+
+  def index
+    @bookings = current_user.bookings
+  end
+
+  def show
+  end
+
+  def new
+    @booking = Booking.new
+  end
+
+  def create
+    @booking = Booking.new(booking_params)
+    @booking.offer = @offer
+    @booking.user = current_user
+    if @booking.save
+      redirect_to @booking
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  private
+
+  def set_offer
+    @offer = Offer.find(params[offer_id])
+  end
+
+  def booking_params
+    params.require(:booking).permit(:start_date, :end_date, :number_of_guests)
+  end
+end
