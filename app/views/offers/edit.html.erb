@@ -1,2 +1,14 @@
-<h1>Offers#edit</h1>
-<p>Find me in app/views/offers/edit.html.erb</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-6 m-auto">
+      <div class="offer-form">
+        <h1> Editing your offer with ID: <%= @offer.id %></h1>
+        <div class="mt-3">
+          <%= render "form", offer: @offer %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%link_to "return to offer", offer_path, class: "btn btn-secondary mt-3" %>
