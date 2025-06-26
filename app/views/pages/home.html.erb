@@ -1,2 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container mt-4">
+  <h1 class="text-center">Welcome</h1>
+  
+    <div class="row mt-5">
+      <% @offers.each do |offer| %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title"><%= offer.title %></h5>
+              <p class="card-text"><%= offer.address %></p>
+              <p><strong><%= number_to_currency(offer.price_per_night, unit: "€") %></strong> / night</p>
+              <%= link_to "View", offer_path(offer), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+</div>
