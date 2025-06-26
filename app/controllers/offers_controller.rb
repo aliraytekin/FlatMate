@@ -1,0 +1,50 @@
+class OffersController < ApplicationController
+  before_action :set_offer, only: %i[show create update destroy]
+
+  def index
+    @offers = Offer.all
+  end
+
+  def show
+    @offer = Offer.find(params[:id])
+  end
+
+  def new
+    @offer = Offer.new
+  end
+
+  def create
+    @offer = Offer.new(offers_params)
+    @offer.user = current_user
+    if @offer.save
+      redirect_to @offer
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @offer.update(offers_params)
+      redirect_to @offer
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+  end
+
+  private
+
+  def set_offer
+    @offer = Offer.find(params[:id])
+  end
+
+  def offers_params
+    params.require(:offer).permit(:title, :address, :description, :price_per_night, :number_of_bathrooms, :number_of_beds,
+                                  :guests_limit, :property_type)
+  end
+end
