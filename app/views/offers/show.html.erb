@@ -4,3 +4,9 @@
 
 <%= link_to "Back to the home page", offers_path %>
 
+<%# create button to edit the offer %>
+<div class="mt-2">
+  <% if user_signed_in?%>
+    <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
+  <% end %>
+</div>
