@@ -2,5 +2,8 @@
 <p><%= @offer.title %></p>
 <p><%= @offer.description %></p>
 
-<%= link_to "Back to the home page", offers_path %>
+<div class="form-actions mb-2">
+  <%= button_to "Delete offer", offer_path(@offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+</div>
 
+<%= link_to "Back to the home page", offers_path %>
