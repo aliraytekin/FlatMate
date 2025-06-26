@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get 'offers/index'
-  get 'offers/show'
-  get 'offers/new'
-  get 'offers/create'
-  get 'offers/edit'
-  get 'offers/update'
-  get 'offers/destroy'
   root to: "pages#home"
 
   resources :offers do
@@ -15,5 +8,5 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index, :show, :edit, :update]
 
   devise_for :users
-
+  resources :users, only: %i[show]
 end
