@@ -1,2 +1,10 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<%= simple_form_for [@offer, @booking] %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :number_of_guests %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to "Cancel booking", class: "btn btn-danger" %>
+  </div>
+<% end %>
