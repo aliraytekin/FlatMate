@@ -6,4 +6,10 @@
   <%= button_to "Delete offer", offer_path(@offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
 </div>
 
-<%= link_to "Back to the home page", offers_path %>
+<%= link_to "Back to the home page", offers_path, class: "btn btn-secondary mt-2" %>
+
+<div class="mt-2">
+  <% if user_signed_in? %>
+    <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
+  <% end %>
+</div>
