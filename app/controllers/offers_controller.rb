@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
-  before_action :set_offer, only: %i[show create edit update]
+  before_action :set_offer, only: %i[show create update destroy]
 
   def index
     @offers = Offer.all
@@ -13,6 +13,12 @@ class OffersController < ApplicationController
   end
 
   def create
+    @offer = Offer.new(offers_params)
+    if @offer.save
+      redirect_to @offer
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
