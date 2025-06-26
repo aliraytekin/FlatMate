@@ -11,12 +11,12 @@ class Offer < ApplicationRecord
   PROPERTY_TYPES = ["Apartment", "House", "Studio", "Villa", "Cabin"]
   validates :property_type, inclusion: { in: PROPERTY_TYPES }
 
-  enum status: { pending: 0, processing_payment: 1, confirmed: 2, cancelled: -1 }
+  #enum status: { pending: 0, processing_payment: 1, confirmed: 2, cancelled: -1 }
 
-  include PgSearch::Model
-  pg_search_scope :search_by_offers,
-                  against: %i[title description],
-                  using: {
-                    tsearch: { prefix: true }
-                  }
+  # include PgSearch::Model
+  # pg_search_scope :search_by_offers,
+  #                 against: %i[title description],
+  #                 using: {
+  #                   tsearch: { prefix: true }
+  #                 }
 end
