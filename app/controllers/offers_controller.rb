@@ -2,6 +2,7 @@ class OffersController < ApplicationController
   before_action :set_offer, only: %i[show create update destroy]
 
   def index
+    @offers = Offer.all
   end
 
   def show
