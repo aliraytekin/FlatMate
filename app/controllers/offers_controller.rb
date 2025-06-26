@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
-  before_action :set_offer, only: %i[show create update destroy edit]
+  before_action :set_offer, only: %i[show update destroy]
 
   def index
     @offers = Offer.all
