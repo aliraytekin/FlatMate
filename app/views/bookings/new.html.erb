@@ -1,10 +1,12 @@
-<%= simple_form_for [@offer, @booking] %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-  <%= f.input :number_of_guests %>
+<div class="container">
+  <%= simple_form_for [@offer, @booking] do |f| %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.input :number_of_guests %>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
-    <%= link_to "Cancel booking", class: "btn btn-danger" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-primary" %>
+      <%= link_to "Cancel booking", @offer, class: "btn btn-danger text-white" %>
+    </div>
+  <% end %>
+</div>
