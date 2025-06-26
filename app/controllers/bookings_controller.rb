@@ -32,7 +32,7 @@ class BookingsController < ApplicationController
   private
 
   def set_offer
-    @offer = Offer.find(params[offer_id])
+    @offer = Offer.find(params[:offer_id])
   end
 
   def booking_params
