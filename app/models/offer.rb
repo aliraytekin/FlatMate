@@ -8,6 +8,5 @@ class Offer < ApplicationRecord
   validates :number_of_beds, :number_of_bathrooms, presence:true
 
   PROPERTY_TYPES = ["Apartment", "House", "Studio", "Villa", "Cabin"]
-  validates :property_type, inclusion: {in: PROPERTY_TYPES}
-
+  validates :property_type, inclusion: {in: PROPERTY_TYPES }
 end
