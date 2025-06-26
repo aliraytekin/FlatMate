@@ -25,9 +25,11 @@ class OffersController < ApplicationController
   end
 
   def edit
+    @offer = Offer.find(params[:id])
   end
 
   def update
+    @offer = Offer.find(params[:id])
     if @offer.update(offers_params)
       redirect_to @offer
     else
