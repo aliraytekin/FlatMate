@@ -31,7 +31,7 @@ class OffersController < ApplicationController
 
   private
 
-  def set_flat
+  def set_offer
     @offer = Offer.find(params[:id])
   end
 
