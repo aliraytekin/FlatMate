@@ -9,7 +9,7 @@ class Offer < ApplicationRecord
   validates :price_per_night, presence: true, numericality: { only_float: true }
   validates :number_of_bathrooms, :number_of_beds, :guests_limit, numericality: { only_integer: true }
 
-  PROPERTY_TYPES = ["Apartment", "House", "Studio", "Villa", "Cabin"]
+  PROPERTY_TYPES = ["Apartment", "House", "Villa", "Cabin"]
   validates :property_type, inclusion: { in: PROPERTY_TYPES }
 
   include PgSearch::Model
