@@ -1,2 +1,19 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
+<h1 class="text-center mt-4">My Bookings</h1>
+
+<% if @bookings.any? %>
+  <div class="row">
+    <% @bookings.each do |booking| %>
+      <div class="col-md-6 mb-4">
+        <div class="card p-3">
+          <h5><%= booking.offer.title %></h5>
+          <p>From: <%= booking.start_date %></p>
+          <p>To: <%= booking.end_date %></p>
+          <p>Guests: <%= booking.number_of_guests %></p>
+          <p>Address: <%= booking.offer.address %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center mt-5">You haven't booked anything yet...</p>
+<% end %>
