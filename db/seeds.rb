@@ -1,14 +1,16 @@
 require 'open-uri'
-require 'faker'
+require 'pexels'
 
 puts "Cleaning database"
 Offer.destroy_all
 User.destroy_all
 
-hosts = []
+users = []
 
 15.times do
-  hosts << User.create!(
+  users << User.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: "123456"
   )
@@ -62,10 +64,20 @@ ADDRESSES = [
   "Old City, Jerusalem, Israel"
 ]
 
+client = Pexels::Client.new(ENV["PEXELS_API_KEY"])
+
+property_type_images = {}
+
+Offer::PROPERTY_TYPES.each do |property_type|
+  photos = client.photos.search(property_type, per_page: 10)
+  images_url = photos.map { |photo| photo.src["original"] }
+  property_type_images[property_type] = images_url
+end
+
 20.times do
   property_type = Offer::PROPERTY_TYPES.sample
 
-  flat = Offer.new(
+  offer = Offer.new(
     title: TITLES.sample,
     address: ADDRESSES.sample,
     description: Faker::Lorem.paragraph(sentence_count: 4),
@@ -74,9 +86,17 @@ ADDRESSES = [
     guests_limit: rand(1..7),
     property_type: property_type,
     price_per_night: rand(50..254),
-    user: hosts.sample
+    user: users.sample
   )
-  flat.save!
+
+  5.times do
+    offer_image = property_type_images[property_type].sample
+    puts "Downloading image #{offer_image}"
+    file = URI.open(offer_image)
+    offer.photos.attach(io: file, filename: "flat_#{rand(1000)}.jpg", content_type: "image/jpg")
+  end
+
+  offer.save!
 end
 
 puts "Accomodations created!"
