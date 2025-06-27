@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_offer, only: %i[new create]
+  before_action :set_booking, only: %i[edit update]
 
   def index
     @bookings = current_user.bookings
@@ -25,7 +26,6 @@ class BookingsController < ApplicationController
 
   def edit
     @booking = Booking.find(params[:id])
-
   end
 
   def update
@@ -47,5 +47,7 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:start_date, :end_date, :number_of_guests)
   end
 
-
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
 end

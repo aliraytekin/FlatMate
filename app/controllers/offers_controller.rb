@@ -2,7 +2,6 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_offer, only: %i[show update destroy]
 
-
   def index
     if params[:query].present?
       @offers = Offer.search_by_offers(params[:query])
@@ -43,9 +42,8 @@ class OffersController < ApplicationController
   end
 
   def destroy
-      @offer = Offer.find(params[:id])
-  @offer.destroy
-  redirect_to offers_path, notice: 'Offer was successfully deleted.'
+    @offer.destroy
+    redirect_to offers_path, notice: 'Offer was successfully deleted.'
   end
 
   private
