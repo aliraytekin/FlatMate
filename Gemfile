@@ -78,3 +78,5 @@ group :test do
 end
 
 gem "pg_search"
+gem "pexels"
+gem "cloudinary"
