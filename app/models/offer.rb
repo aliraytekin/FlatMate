@@ -5,7 +5,7 @@ class Offer < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :address, presence: true
-  validates :price_per_night, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :price_per_night, presence: true, numericality: { only_float: true }
   validates :number_of_bathrooms, :number_of_beds, :guests_limit, numericality: { only_integer: true }
 
   PROPERTY_TYPES = ["Apartment", "House", "Studio", "Villa", "Cabin"]
