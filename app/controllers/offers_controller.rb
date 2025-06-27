@@ -41,9 +41,9 @@ class OffersController < ApplicationController
   def destroy
     if @offer.user == current_user
       @offer.destroy
-      redirect_to @offers_path, notice: 'Offer was successfully deleted.'
+      redirect_to root_path, notice: 'Offer was successfully deleted.'
     else
-      redirect_to @offers_path, alert: "You are not authorised to delete this offer"
+      redirect_to root_path, alert: "You are not authorised to delete this offer"
     end
   end
 

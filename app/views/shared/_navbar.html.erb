@@ -14,11 +14,16 @@
           <li class="nav-item">
             <%= link_to "New flat", new_offer_path, class: "btn btn-outline-primary me-2 mt-1" %>
           </li>
+          <li class="nav-item">
+              <%= link_to "See my bookings",  bookings_path, class: "btn btn-outline-primary me-2 mt-1" %>
+            </li>
           <% if controller_name == "offers" && action_name == "show" %>
             <li class="nav-item">
               <%= link_to "Book this flat", new_offer_booking_path(offer), class: "btn btn-outline-primary me-2 mt-1" %>
             </li>
           <% end %>
+
+
 
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

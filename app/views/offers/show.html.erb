@@ -2,6 +2,7 @@
   <h4><%= @offer.title %></h4>
   <p><%= @offer.description %></p>
 
+
   <div class="form-actions mb-2 d-flex gap-2">
     <% if current_user == @offer.user %>
       <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
@@ -14,5 +15,5 @@
     <% end %>
   </div>
 
-  <%= link_to "Back to the home page", offers_path, class: "btn btn-secondary mt-2" %>
+  <%= link_to "Back to the home page", root_path, class: "btn btn-secondary mt-2" %>
 </div>
