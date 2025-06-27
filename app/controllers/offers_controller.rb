@@ -1,6 +1,6 @@
 class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
-  before_action :set_offer, only: %i[show update destroy]
+  before_action :set_offer, only: %i[show edit update destroy]
 
   def index
     if params[:query].present?
@@ -11,7 +11,6 @@ class OffersController < ApplicationController
   end
 
   def show
-    @offer = Offer.find(params[:id])
   end
 
   def new
@@ -29,11 +28,9 @@ class OffersController < ApplicationController
   end
 
   def edit
-    @offer = Offer.find(params[:id])
   end
 
   def update
-
     if @offer.update(offers_params)
       redirect_to @offer
     else
