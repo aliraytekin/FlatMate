@@ -10,6 +10,9 @@
           <p>To: <%= booking.end_date %></p>
           <p>Guests: <%= booking.number_of_guests %></p>
           <p>Address: <%= booking.offer.address %></p>
+          <%= form_with url: booking_path(booking), method: :delete, local: true, html: { onsubmit: "return confirm('Are you sure you want to delete this booking?');" } do %>
+            <%= submit_tag "Delete booking", class: "btn btn-danger" %>
+          <% end %>
         </div>
       </div>
     <% end %>
