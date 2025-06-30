@@ -1,9 +1,9 @@
 class BookingsController < ApplicationController
   before_action :set_offer, only: %i[new create]
-  before_action :set_booking, only: %i[show edit update]
+  before_action :set_booking, only: %i[show edit update accept refuse]
 
   def index
-    @bookings = current_user.bookings
+    @bookings = Booking.all
   end
 
   def show
@@ -34,6 +34,26 @@ class BookingsController < ApplicationController
       redirect_to @booking, notice: "Booking was successfully updated."
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def accept
+    booking = Booking.find(params[:id])
+    if booking.offer.user == current_user
+      booking.accepted!
+      redirect_to bookings_path, notice: "Booking accepted."
+    else
+      redirect_to bookings_path, alert: "You are not authorised to do that"
+    end
+  end
+
+  def refuse
+    booking = Booking.find(params[:id])
+    if booking.offer.user == current_user
+      booking.refused!
+      redirect_to bookings_path, notice: "Booking cancelled."
+    else
+      redirect_to bookings_path, alert: "You are not authorised to do that"
     end
   end
 

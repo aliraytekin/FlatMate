@@ -1,6 +1,9 @@
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-sm-8 my-3">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg)">
+  <div class="container">
+    <h1>Finding an accomodation made simple!</h1>
+    <p>Discover stays that fit your style and budget — from cozy homes to unique experiences — all in just a few clicks.</p>
+    <div class="row justify-content-left">
+    <div class="col-sm-10">
       <%= form_tag offers_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query,
               params[:query],
@@ -11,9 +14,10 @@
       <% end %>
     </div>
   </div>
+  </div>
+</div>
 
-  <h1 class="text-center">Welcome</h1>
-
+<div class="container mt-4">
   <div class="row mt-5">
     <% @offers.each do |offer| %>
       <div class="col-md-4 mb-4">
