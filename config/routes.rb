@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  get 'bookings/index'
-  get 'bookings/show'
-  get 'bookings/new'
-  get 'bookings/create'
-  get 'bookings/edit'
-  get 'bookings/update'
   root to: "pages#home"
 
   resources :offers do
-    resources :bookings, only: [:new, :create]
+    resources :bookings, only: %i[new create]
   end
 
-  resources :bookings, only: [:index, :show, :edit, :update]
+  resources :bookings, only: %i[index show edit update] do
+    member do
+      patch :accept
+      patch :refuse
+    end
+  end
 
   devise_for :users
   resources :users, only: %i[show]
