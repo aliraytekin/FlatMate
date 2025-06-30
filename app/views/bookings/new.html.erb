@@ -1,7 +1,15 @@
 <div class="container">
-  <%= simple_form_for [@offer, @booking] do |f| %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
+  <%= simple_form_for([@offer, @booking], html: { data: { turbo: false }}) do |f| %>
+    <% if @booking.errors[:base].any? %>
+      <div class="alert alert-danger">
+        <% @booking.errors[:base].each do |error| %>
+          <p><%= error %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= f.input :start_date, as: :string, input_html: { data: { controller: "flatpickr" } } %>
+    <%= f.input :end_date, as: :string, input_html: { data: { controller: "flatpickr" } } %>
     <%= f.input :number_of_guests %>
 
     <div class="form-actions">
