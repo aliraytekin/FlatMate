@@ -25,5 +25,21 @@
   background-position: center;
   padding: 50px 0;
   height: 100vh;
-  color:white
+  color:white;
+
+}
+
+.banner-edit-offer h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.banner-edit-offer p {
+  font-size: 20px;
+  font-style: italic;
+  opacity:.7;
 }
