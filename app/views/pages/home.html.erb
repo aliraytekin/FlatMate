@@ -27,7 +27,9 @@
               <div class="carousel-inner">
                 <% offer.photos.each_with_index do |photo, index| %>
                   <div class="carousel-item <%= 'active' if index == 0 %>">
-                    <%= cl_image_tag photo.key, transformation: { width: 400, height: 250, crop: "fill" }, class: "d-block w-100" %>
+                    <%= link_to offer_path(offer) do %>
+                      <%= cl_image_tag photo.key, transformation: { width: 400, height: 250, crop: "fill" }, class: "d-block w-100" %>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
