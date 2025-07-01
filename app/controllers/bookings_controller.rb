@@ -6,6 +6,7 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
 
+
   def show
   end
 
@@ -51,6 +52,16 @@ class BookingsController < ApplicationController
     booking = Booking.find(params[:id])
     if booking.offer.user == current_user
       booking.refused!
+      redirect_to bookings_path, notice: "Booking cancelled."
+    else
+      redirect_to bookings_path, alert: "You are not authorised to do that"
+    end
+  end
+
+  def cancel
+    booking = Booking.find(params[:id])
+    if booking.user = current_user
+      booking.cancelled!
       redirect_to bookings_path, notice: "Booking cancelled."
     else
       redirect_to bookings_path, alert: "You are not authorised to do that"

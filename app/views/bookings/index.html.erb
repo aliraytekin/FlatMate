@@ -2,9 +2,13 @@
 <h1 class="text-center mt-4 bookings-title mb-4">My Bookings</h1>
 
 <div class="container">
-  <% if @bookings.any? %>
+  <% active_bookings = @bookings.reject(&:cancelled?) %>
+  <% cancelled_bookings = @bookings.select(&:cancelled?) %>
+
+  <% if active_bookings.any? %>
+    <h2 class="mt-4">Active Bookings</h2>
     <div class="row">
-      <% @bookings.each do |booking| %>
+      <% active_bookings.each do |booking| %>
         <% if booking.offer.user == current_user %>
           <div class="col-md-6 mb-4">
             <div class="card p-3">
@@ -17,8 +21,8 @@
               <% if booking.pending? %>
                 <p>Do you want to accept or refuse the booking?</p>
                 <div class="d-flex justify-content-center gap-3">
-                  <%= button_to "Accept booking", accept_booking_path(booking), method: :patch, class: "btn btn-success", data: { confirm: "Accept this booking" } %>
-                  <%= button_to "Refuse booking", refuse_booking_path(booking), method: :patch, class: "btn btn-danger", data: { confirm: "Refuse this booking" } %>
+                  <%= button_to "Accept booking", accept_booking_path(booking), method: :patch, class: "btn btn-success", data: { confirm: "Accept this booking?" } %>
+                  <%= button_to "Refuse booking", refuse_booking_path(booking), method: :patch, class: "btn btn-danger", data: { confirm: "Refuse this booking?" } %>
                 </div>
               <% end %>
             </div>
@@ -26,24 +30,48 @@
         <% elsif booking.user == current_user %>
           <div class="col-md-6 mb-4">
             <div class="card p-3">
+              <h5><%= booking.offer.title %></h5>
+              <p>From: <%= booking.start_date %></p>
+              <p>To: <%= booking.end_date %></p>
+              <p>Guests: <%= booking.number_of_guests %></p>
+              <p>Address: <%= booking.offer.address %></p>
+              <p>Status: <span class="badge bg-secondary"><%= booking.status.capitalize %></span></p>
 
-                  <h5><Strong><%= booking.offer.title %></strong></h5>
-                  <p>From: <%= booking.start_date %></p>
-                  <p>To: <%= booking.end_date %></p>
-                  <p>Guests: <%= booking.number_of_guests %></p>
-                  <p>Address: <%= booking.offer.address %></p>
-                  <p>Booking status: <%= booking.status %></p>
-                </div>
+              <% if booking.accepted? || booking.pending? %>
+                <%= form_with url: cancel_booking_path(booking), method: :patch, local: true, data: { turbo_confirm: "Cancel this booking?" } do %>
+                  <%= submit_tag "Cancel booking", class: "btn btn-warning mt-2" %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         <% end %>
       <% end %>
     </div>
   <% else %>
-    <p class="text-center mt-5">You haven't booked anything yet...</p>
+    <p class="text-center mt-5">No active bookings yet.</p>
+  <% end %>
+
+  <% if cancelled_bookings.any? %>
+    <h2 class="mt-5">Cancelled Bookings</h2>
+    <div class="row">
+      <% cancelled_bookings.each do |booking| %>
+        <% if booking.user == current_user %>
+          <div class="col-md-6 mb-4">
+            <div class="card p-3 bg-light text-muted border-secondary">
+              <h5><%= booking.offer.title %></h5>
+              <p>From: <%= booking.start_date %></p>
+              <p>To: <%= booking.end_date %></p>
+              <p>Guests: <%= booking.number_of_guests %></p>
+              <p>Address: <%= booking.offer.address %></p>
+              <p><span class="badge bg-secondary">Cancelled</span></p>
+              <p class="text-muted mt-2">This booking was cancelled.</p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>
-
-<div class="container">
-    <%= link_to "Back to home page", root_path, class: "btn btn-danger text-white"  %>
+<div class="container mt-4 text-center">
+  <%= link_to "Back to home page", root_path, class: "btn btn-danger text-white" %>
 </div>
