@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
 pin "flatpickr" # @4.6.13
+pin "@stripe/stripe-js", to: "@stripe--stripe-js.js" # @7.4.0

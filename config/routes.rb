@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       patch :accept
       patch :refuse
       get :payment
-      post :sucess
+      post :success
     end
   end
 
