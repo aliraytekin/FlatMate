@@ -69,7 +69,7 @@ class BookingsController < ApplicationController
   def success
     redirect_to root_path, notice: "Your request to book will be confirmed by a host soon!"
   end
-    
+
   def cancel
     booking = Booking.find(params[:id])
     if booking.user = current_user
