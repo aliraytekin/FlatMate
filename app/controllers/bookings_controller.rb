@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_offer, only: %i[new create]
-  before_action :set_booking, only: %i[show edit update accept refuse]
+  before_action :set_booking, only: %i[show edit update payment success]
+  before_action :authorize_user!, only: %i[payment success]
 
   def index
     @bookings = Booking.all
@@ -18,18 +19,16 @@ class BookingsController < ApplicationController
     @booking.offer = @offer
     @booking.user = current_user
     if @booking.save
-      redirect_to @booking
+      redirect_to payment_booking_path(@booking)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    @booking = Booking.find(params[:id])
   end
 
   def update
-    @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
       redirect_to @booking, notice: "Booking was successfully updated."
     else
@@ -57,6 +56,19 @@ class BookingsController < ApplicationController
     end
   end
 
+  def payment
+    @booking = Booking.find(params[:id])
+    @payment_intent = Stripe::PaymentIntent.create(
+      amount: @booking.calculate_total_price.to_i,
+      currency: 'eur',
+      metadata: { booking_id: @booking.id }
+    )
+  end
+
+  def success
+    redirect_to root_path, notice: "Your request to book will be confirmed by a host soon!"
+  end
+
   private
 
   def set_offer
@@ -69,5 +81,11 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def authorize_user!
+    unless current_user == @booking.user
+      redirect_to root_path, alert: "You are not authorized to see this page"
+    end
   end
 end

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     member do
       patch :accept
       patch :refuse
+      get :payment
+      post :sucess
     end
   end
 

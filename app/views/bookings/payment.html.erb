@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Complete your booking for <%= @booking.flat.title %></h2>
+
+  <%= form_with_url: success_booking_path(@booking), method: :post,
+                  html: { data: {
+                    controller: "stripe",
+                    stripe-target: "form",
+                    stripe-public-key-value: ENV['STRIPE_PUBLISHABLE_KEY'],
+                    stripe-client-secret-value: @payment_intent.client_secret
+                  } } do |f| %>
+
+  <div data-stripe-target="card" class="mb-3"></div>
+
+</div>
