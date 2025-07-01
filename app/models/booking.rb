@@ -8,6 +8,14 @@ class Booking < ApplicationRecord
   attribute :status, :integer
   enum status: { refused: -2, cancelled: -1, pending: 0, accepted: 1 }
 
+  def duration
+    end_date - start_date
+  end
+
+  def calculate_total_price
+    self.total_price = offer.price_per_night * duration
+  end
+    
   def overlapping_dates
     return unless offer
 

@@ -7,13 +7,13 @@
         <% end %>
       </div>
     <% end %>
-
+  
     <%= f.input :start_date, as: :string, input_html: { data: { controller: "flatpickr" } } %>
     <%= f.input :end_date, as: :string, input_html: { data: { controller: "flatpickr" } } %>
     <%= f.input :number_of_guests %>
 
     <div class="form-actions">
-      <%= f.button :submit, class: "btn btn-primary" %>
+      <%= f.button :submit, "Continue to Payment", class: "btn btn-primary" %>
       <%= link_to "Cancel booking", @offer, class: "btn btn-danger text-white" %>
     </div>
   <% end %>

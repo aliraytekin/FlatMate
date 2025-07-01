@@ -80,3 +80,4 @@ end
 gem "pg_search"
 gem "pexels"
 gem "cloudinary"
+gem "stripe"
