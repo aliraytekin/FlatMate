@@ -5,13 +5,13 @@
     <p>You can edit your booking details below:</p>
   </div>
 
-  <div class="container col-md-3">
+  <div class="container col-md-3 mb-4">
     <%= simple_form_for [@offer, @booking] do |f| %>
       <%= f.input :start_date, as: :string, input_html: { data: { controller: "flatpickr" } } %>
       <%= f.input :end_date, as: :string, input_html: { data: { controller: "flatpickr" } } %>
       <%= f.input :number_of_guests %>
 
-      <div class="form-actions ">
+      <div class="form-actions">
         <%= f.button :submit, "Update Booking", class: "btn btn-primary" %>
         <%= link_to "Cancel edit", booking_path, class: "btn btn-danger text-white" %>
       </div>

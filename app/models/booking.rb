@@ -15,7 +15,7 @@ class Booking < ApplicationRecord
   def calculate_total_price
     self.total_price = offer.price_per_night * duration
   end
-    
+
   def overlapping_dates
     return unless offer
 
