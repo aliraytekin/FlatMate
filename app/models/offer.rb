@@ -1,6 +1,7 @@
 class Offer < ApplicationRecord
   belongs_to :user
   has_many :bookings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_many_attached :photos
 
   validates :title, presence: true
@@ -18,4 +19,8 @@ class Offer < ApplicationRecord
                   using: {
                     tsearch: { prefix: true }
                   }
+
+  def average_rating
+    reviews.average(:rating)&.round(2) || 0
+  end
 end

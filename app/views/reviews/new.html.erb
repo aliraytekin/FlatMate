@@ -1,0 +1,11 @@
+<div class="container">
+  <%= simple_form_for [@offer, @review] do |f| %>
+    <%= f.input :rating %>
+    <%= f.input :comment, as: :text, input_html: { rows: 5 } %>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-success" %>
+      <%= link_to "Cancel review", bookings_path, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>
