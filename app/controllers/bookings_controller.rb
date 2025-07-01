@@ -7,6 +7,7 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
 
+
   def show
   end
 
@@ -67,6 +68,16 @@ class BookingsController < ApplicationController
 
   def success
     redirect_to root_path, notice: "Your request to book will be confirmed by a host soon!"
+  end
+    
+  def cancel
+    booking = Booking.find(params[:id])
+    if booking.user = current_user
+      booking.cancelled!
+      redirect_to bookings_path, notice: "Booking cancelled."
+    else
+      redirect_to bookings_path, alert: "You are not authorised to do that"
+    end
   end
 
   private

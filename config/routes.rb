@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       patch :refuse
       get :payment
       post :success
+      patch :cancel
     end
   end
 
