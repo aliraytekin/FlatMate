@@ -12,7 +12,7 @@ class Offer < ApplicationRecord
 
   PROPERTY_TYPES = ["Apartment", "House", "Villa", "Cabin"]
   validates :property_type, inclusion: { in: PROPERTY_TYPES }
-
+  validates :photos, presence: true
   include PgSearch::Model
   pg_search_scope :search_by_offers,
                   against: %i[title description],
