@@ -1,4 +1,5 @@
-<h1 class="text-center mt-4">My Bookings</h1>
+
+<h1 class="text-center mt-4 bookings-title mb-4">My Bookings</h1>
 
 <div class="container">
   <% active_bookings = @bookings.reject(&:cancelled?) %>
@@ -9,7 +10,6 @@
     <div class="row">
       <% active_bookings.each do |booking| %>
         <% if booking.offer.user == current_user %>
-          <!-- Бронювання на мій оффер -->
           <div class="col-md-6 mb-4">
             <div class="card p-3">
               <h5><%= booking.offer.title %></h5>
@@ -28,7 +28,6 @@
             </div>
           </div>
         <% elsif booking.user == current_user %>
-          <!-- Мої бронювання -->
           <div class="col-md-6 mb-4">
             <div class="card p-3">
               <h5><%= booking.offer.title %></h5>
@@ -73,7 +72,6 @@
     </div>
   <% end %>
 </div>
-
 <div class="container mt-4 text-center">
   <%= link_to "Back to home page", root_path, class: "btn btn-danger text-white" %>
 </div>
