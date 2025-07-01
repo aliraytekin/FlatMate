@@ -1,0 +1,19 @@
+
+<div class="custom-booking-form">
+    <%= simple_form_for([@offer, @booking], html: { data: { turbo: false }}) do |f| %>
+      <% if @booking.errors[:base].any? %>
+        <div class="alert alert-danger">
+          <% @booking.errors[:base].each do |error| %>
+            <p><%= error %></p>
+          <% end %>
+        </div>
+      <% end %>
+      <%= f.input :start_date, as: :string, placeholder: "Start date",label: false, input_html: { data: { controller: "flatpickr" } } %>
+      <%= f.input :end_date, as: :string, placeholder: "End date",label: false, input_html: { data: { controller: "flatpickr" } } %>
+      <%= f.input :number_of_guests, label: false, placeholder: "Number of guests" %>
+      <div class="form-actions">
+        <%= f.button :submit, "Continue to Payment", class: "btn btn-primary" %>
+        <%= link_to "Cancel booking", @offer, class: "btn btn-danger text-white" %>
+      </div>
+    <% end %>
+</div>
