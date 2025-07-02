@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
   validates :start_date, :end_date, :number_of_guests, presence: true
   validates :number_of_guests, numericality: { only_integer: true, greater_than: 0 }
   validate :overlapping_dates
+  default_scope { order(created_at: :desc) }
 
   attribute :status, :integer
   enum status: { refused: -2, cancelled: -1, pending: 0, accepted: 1 }
