@@ -91,12 +91,16 @@
   background-position: center;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: 70vh;
   display: flex;
 }
 
 
 .container-show {
+  position: 30px; /* position relative to .background-container */
+  top: 20px;   /* distance from top */
+  left: 20px;  /* distance from left */
+
   color: white;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.2);
