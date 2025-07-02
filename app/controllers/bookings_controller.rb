@@ -67,7 +67,8 @@ class BookingsController < ApplicationController
   end
 
   def success
-    redirect_to root_path, notice: "Your request to book will be confirmed by a host soon!"
+    redirect_to confirmation_booking_path(@booking), notice: "Your request to book will be confirmed by a host soon!"
+
   end
 
   def cancel
@@ -78,6 +79,10 @@ class BookingsController < ApplicationController
     else
       redirect_to bookings_path, alert: "You are not authorised to do that"
     end
+  end
+
+  def confirmation
+    @booking = Booking.find(params[:id])
   end
 
   private

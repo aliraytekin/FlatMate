@@ -1,0 +1,37 @@
+.offers-wrap {
+  Background-color: white;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 700px;
+  border-radius: 16px;
+
+  .form-control {
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background-color: #0D6EFD;
+      font-weight: 400;
+
+    }
+
+    .btn-danger {
+      background-color: rgba(255, 0, 0, 0.992);
+      font-weight: 400;
+
+    }
+  }
+
+}

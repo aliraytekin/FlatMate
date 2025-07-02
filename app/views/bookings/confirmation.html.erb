@@ -1,0 +1,15 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="text-center p-5 shadow-lg rounded-4" style="max-width: 600px; background-color: #f8f9fa;">
+    <h1 class="mb-3" style="font-size: 2.5rem;">🎉 Booking Confirmed!</h1>
+    <p class="lead mb-4">
+    Thank you, <%= @booking.user.first_name.capitalize %> <%= @booking.user.last_name.capitalize %>!<br>
+      Your booking for "<%= @booking.offer.title %>" is confirmed from <strong><%= @booking.start_date %></strong> to <strong><%= @booking.end_date %></strong>.
+    </p>
+
+    <hr class="my-4">
+
+    <p class="text-muted">We’ve sent you a confirmation email with all the details.</p>
+
+    <%= link_to "← Back to Home", root_path, class: "btn btn-primary btn-lg mt-3" %>
+  </div>
+</div>

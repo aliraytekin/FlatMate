@@ -20,10 +20,12 @@ class Booking < ApplicationRecord
   def overlapping_dates
     return unless offer
 
-    overlapping = offer.bookings.where.not(id: id).where(
-      "start_date < ? AND end_date > ?", end_date, start_date
+    overlapping = offer.bookings
+                       .where.not(id: id)
+                       .where.not(status: :cancelled)
+                       .where("start_date < ? AND end_date > ?", end_date, start_date
     )
 
-    errors.add(:base, "These dates are not available") if overlapping.exists?
+    errors.add(:base, "These dates are already booked") if overlapping.exists?
   end
 end

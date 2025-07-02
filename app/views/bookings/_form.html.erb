@@ -1,6 +1,6 @@
 
 <div class="custom-booking-form">
-    <%= simple_form_for([@offer, @booking], html: { data: { turbo: false }}) do |f| %>
+    <%= simple_form_for([@offer, @booking], html: { data: { controller: "price", turbo: false }}) do |f| %>
       <% if @booking.errors[:base].any? %>
         <div class="alert alert-danger">
           <% @booking.errors[:base].each do |error| %>
@@ -8,12 +8,16 @@
           <% end %>
         </div>
       <% end %>
-      <%= f.input :start_date, as: :string, placeholder: "Start date",label: false, input_html: { data: { controller: "flatpickr" } } %>
-      <%= f.input :end_date, as: :string, placeholder: "End date",label: false, input_html: { data: { controller: "flatpickr" } } %>
+      <%= f.input :start_date, as: :string, placeholder: "Start date",label: false, input_html: { data: { controller: "flatpickr", action: "input->price#update" } } %>
+      <%= f.input :end_date, as: :string, placeholder: "End date",label: false, input_html: { data: { controller: "flatpickr", action: "input->price#update" } } %>
       <%= f.input :number_of_guests, label: false, placeholder: "Number of guests" %>
+      <p>Total price: <span data-price-target="total">€0</span></p>
       <div class="form-actions">
         <%= f.button :submit, "Continue to Payment", class: "btn btn-primary" %>
         <%= link_to "Cancel booking", @offer, class: "btn btn-danger text-white" %>
       </div>
     <% end %>
 </div>
+
+<%# This line is only for JS price per night file %>
+<span id="price-per-night" data-price-per-night="<%=@offer.price_per_night %>" hidden></span>
