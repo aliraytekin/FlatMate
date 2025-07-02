@@ -1,7 +1,7 @@
 <div class="banner-active-booking" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg)">
-  <h1 class="text-center mt-4 bookings-title mb-4 ">My Booking History</h1>
+  <h1 class="text-center mt-4 bookings-title mb-4 ">My Booking History Dashboard</h1>
   <p class="text-center mb-0 description-text fs-5">
-      Welcome <%= current_user.email%>, Here you can view and manage all your current and upcoming bookings with ease.
+      Welcome <%= current_user.first_name%>, Here you can view and manage all your current and upcoming bookings with ease.
   </p>
 </div>
   <div class="container">
@@ -13,14 +13,14 @@
       <div class="row">
         <% active_bookings.each do |booking| %>
           <% if booking.offer.user == current_user %>
-            <div class="col-md-6 mb-4">
-              <div class="card p-3">
-                <h5><%= booking.offer.title %></h5>
-                <p>From: <%= booking.start_date %></p>
-                <p>To: <%= booking.end_date %></p>
-                <p>Guests: <%= booking.number_of_guests %></p>
-                <p>Guest name: <%= "#{booking.user.first_name} #{booking.user.last_name}" %></p>
-                <p>Guest email: <%= booking.user.email %></p>
+            <div class="col-md-6 mb-4" style="width: 25rem;">
+              <div class="border border-4 rounded-3" style="background-color: grey">
+                <h5 class="card-title mb-2 mt-2 p-3"><strong><%= booking.offer.title %></strong></h5>
+                <p class="card-text">From: <%= booking.start_date %></p>
+                <p class="card-text">To: <%= booking.end_date %></p>
+                <p class="card-text">Guests: <%= booking.number_of_guests %></p>
+                <p class="card-text">Guest name: <%= "#{booking.user.first_name} #{booking.user.last_name}" %></p>
+                <p class="card-text mb-3">Guest email: <%= booking.user.email %></p>
                 <% if booking.pending? %>
                   <p>Do you want to accept or refuse the booking?</p>
                   <div class="d-flex justify-content-center gap-3">
@@ -60,15 +60,15 @@
       <div class="row">
         <% cancelled_bookings.each do |booking| %>
           <% if booking.user == current_user %>
-            <div class="col-md-6 mb-4">
-              <div class="card p-3 bg-light text-muted border-secondary">
-                <h5><%= booking.offer.title %></h5>
-                <p>From: <%= booking.start_date %></p>
-                <p>To: <%= booking.end_date %></p>
-                <p>Guests: <%= booking.number_of_guests %></p>
-                <p>Address: <%= booking.offer.address %></p>
-                <p><span class="badge bg-secondary">Cancelled</span></p>
-                <p class="text-muted mt-2">This booking was cancelled.</p>
+            <div class="col-md-6 mb-4" style="width: 25rem;">
+              <div class="border border-4 rounded-3" style="background-color: grey">
+                <h5 class="card-title mb-2 mt-2 p-3"><strong><%= booking.offer.title %></strong></h5>
+                <p class="card-text">From: <%= booking.start_date %></p>
+                <p class="card-text">To: <%= booking.end_date %></p>
+                <p class="card-text">Guests: <%= booking.number_of_guests %></p>
+                <p class="card-text">Address: <%= booking.offer.address %></p>
+                <p class="card-text"><span class="badge bg-secondary">Cancelled</span></p>
+                <p class="card-text mt-2">This booking was cancelled.</p>
               </div>
             </div>
           <% end %>
@@ -76,6 +76,6 @@
       </div>
     <% end %>
   </div>
-  <div class="container mt-4 text-center">
+  <div class="container mt-2 text-left">
     <%= link_to "Back to home page", root_path, class: "btn btn-danger text-white" %>
   </div>

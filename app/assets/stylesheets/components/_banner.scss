@@ -84,3 +84,33 @@
     transform: translateY(0);
   }
 }
+
+
+.banner-offer-show {
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  display: flex;
+}
+
+
+.container-show {
+  color: white;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  gap: 16px;               /* space between buttons */
+  flex-wrap: wrap;         /* wrap on small screens */
+  margin-top: 20px;        /* spacing from above content */
+}
+
+.button-group .btn {
+  white-space: nowrap;     /* prevent button text from wrapping */
+}

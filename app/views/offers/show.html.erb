@@ -1,19 +1,23 @@
-<div class="container mt-3">
-  <h4><%= @offer.title %></h4>
-  <p><%= @offer.description %></p>
+<div class="banner-offer-show" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571451/pexels-photo-1571451.jpeg)">
+
+ <div class="container-show">
+    <h4 class="text-center"><strong><%= @offer.title %></strong></h4>
+    <p><%= @offer.description %></p>
 
 
-  <div class="form-actions mb-2 d-flex gap-2">
-    <% if current_user == @offer.user %>
-      <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
-      <%= button_to "Delete offer", offer_path(@offer),
-          method: :delete,
-          data: { confirm: "Are you sure?" },
-          class: "btn btn-danger" %>
-    <% else %>
-      <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-primary" %>
-    <% end %>
+    <div class="button-group mb-2 gap-3">
+      <% if current_user == @offer.user %>
+        <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
+        <%= button_to "Delete offer", offer_path(@offer),
+            method: :delete,
+            data: { confirm: "Are you sure?" },
+            class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-primary" %>
+      <% end %>
+      <%= link_to "<< Home", root_path, class: "btn btn-success" %>
+    </div>
+
+
   </div>
-
-  <%= link_to "Back to the home page", root_path, class: "btn btn-secondary mt-2" %>
 </div>
