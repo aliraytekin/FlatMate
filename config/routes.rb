@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get :payment
       post :success
       patch :cancel
+      get :confirmation
     end
   end
 
