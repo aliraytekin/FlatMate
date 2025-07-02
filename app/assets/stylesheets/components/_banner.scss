@@ -43,3 +43,78 @@
   font-style: italic;
   opacity:.7;
 }
+
+
+.banner-active-booking {
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 10px 15px;
+  margin-bottom: 5px;
+}
+
+.card-text {
+ font-size: 16px;
+ padding-left: 15px;
+ line-height: 0.6;
+ color:white;
+}
+
+.card-title {
+ color:white
+}
+
+.bookings-title {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeSlideIn 1s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.banner-offer-show {
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  display: flex;
+}
+
+
+.container-show {
+  position: 30px; /* position relative to .background-container */
+  top: 20px;   /* distance from top */
+  left: 20px;  /* distance from left */
+
+  color: white;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.form-actions .btn {
+  white-space: nowrap;
+}
