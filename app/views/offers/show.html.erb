@@ -5,7 +5,7 @@
     <p><%= @offer.description %></p>
 
 
-    <div class="button-group mb-2 gap-3">
+    <div class="form-actions mb-4 d-flex gap-2">
       <% if current_user == @offer.user %>
         <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
         <%= button_to "Delete offer", offer_path(@offer),
@@ -14,10 +14,8 @@
             class: "btn btn-danger" %>
       <% else %>
         <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-primary" %>
+        <%= link_to "<< Home", root_path, class: "btn btn-success" %>
       <% end %>
-      <%= link_to "<< Home", root_path, class: "btn btn-success" %>
     </div>
-
-
   </div>
 </div>
