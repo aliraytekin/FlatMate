@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  get 'reviews/new'
-  get 'reviews/create'
   root to: "pages#home"
 
   resources :offers do
-    resources :reviews, only: %i[new create]
+    resources :reviews, only: %i[new create edit update destroy]
     resources :bookings, only: %i[new create]
   end
 
