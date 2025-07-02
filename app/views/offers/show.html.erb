@@ -26,7 +26,7 @@
   <% @offer.reviews.each do |review| %>
     <div class="card p-3 mb-3">
       <div class="d-flex justify-content-between align-items-center mb-1">
-        <strong><%= review.user.email %></strong>
+        <strong><%= review.user.first_name.capitalize %> <%= review.user.last_name.capitalize %></strong>
         <span class="badge bg-success">Rating: <%= review.rating %>/5</span>
       </div>
       <p class="mb-2"><%= review.comment %></p>
