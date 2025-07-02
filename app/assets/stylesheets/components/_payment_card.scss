@@ -1,0 +1,41 @@
+.payment-card {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff, #f5f7fa);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  color: #333;
+
+  &-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #222;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  &-content {
+    font-size: 1.1rem;
+    margin: 0.7rem 0;
+  }
+
+  &-pay-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background: #4a90e2;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #357ABD;
+    }
+  }
+}
