@@ -25,6 +25,6 @@ class Booking < ApplicationRecord
                        .where("start_date < ? AND end_date > ?", end_date, start_date
     )
 
-    errors.add(:base, "These dates are not available") if overlapping.exists?
+    errors.add(:base, "These dates are already booked") if overlapping.exists?
   end
 end
