@@ -6,57 +6,59 @@
   <%= cl_image_tag @offer.photos.first.key , alt: "House", width: 800, height: 400 %>
 
 
-   <div class="d-grid gap-3" id="carouselOffer<%= @offer.id %>" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <% @offer.photos.each_with_index do |photo, index| %>
-        <div class="carousel-item <%= 'active' if index == 0 %>">
-          <%= cl_image_tag photo.key, width: 300, height: 300, class: "d-block w-100" %>
-        </div>
-          <% end %>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffer" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselOffer" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    <div>
-
-<div class="d-grid gap-3 container">
-    <h2>Reviews :</h2>
-    <% if @reviews.any? %>
-    <% @reviews.each do |review| %>
-      <div class="card">
-          <div class="card-header"> Review </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p><%= review.comment %></p>
-        </blockquote>
-        <div class="star-rating mb-3">
-              <% 5.times do |i| %>
-                <% if i < @offer.average_rating.to_i %>
-                  <i class="fas fa-star"></i>
-                <% else %>
-                  <i class="far fa-star"></i>
-                <% end %>
-              <% end %>
-            </div>
-      </div>
-    </div>
+  <% if @offer.photos.attached? %>
+    <div id="carouselOffer<%= @offer.id %>" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% @offer.photos.each_with_index do |photo, index| %>
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <%= link_to offer_path(@offer) do %>
+              <%= cl_image_tag photo.key, transformation: { width: 400, height: 250, crop: "fill" }, class: "d-block w-100" %>
+            <% end %>
+          </div>
         <% end %>
-    <% else %>
-    <div class="card">
-      <div class="card-header"> Review </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p>No reviews yet for this offer</p>
-        </blockquote>
       </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffer<%= @offer.id %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselOffer<%= @offer.id %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
     </div>
-    <% end %>
-</div>
+  <% end %>
+
+  <div class="d-grid gap-3 container">
+      <h2>Reviews :</h2>
+      <% if @reviews.any? %>
+      <% @reviews.each do |review| %>
+        <div class="card">
+            <div class="card-header"> Review </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p><%= review.comment %></p>
+          </blockquote>
+          <div class="star-rating mb-3">
+                <% 5.times do |i| %>
+                  <% if i < @offer.average_rating.to_i %>
+                    <i class="fas fa-star"></i>
+                  <% else %>
+                    <i class="far fa-star"></i>
+                  <% end %>
+                <% end %>
+              </div>
+        </div>
+      </div>
+          <% end %>
+      <% else %>
+      <div class="card">
+        <div class="card-header"> Review </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>No reviews yet for this offer</p>
+          </blockquote>
+        </div>
+      </div>
+      <% end %>
+  </div>
 
 
   <div class="form-actions p mb-2 d-flex gap-2 row">
