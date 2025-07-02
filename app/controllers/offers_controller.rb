@@ -12,6 +12,7 @@ class OffersController < ApplicationController
 
   def show
     @offer = Offer.find(params[:id])
+    @reviews = @offer.reviews
   end
 
   def new

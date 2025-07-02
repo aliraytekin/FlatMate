@@ -24,6 +24,40 @@
       </div>
     <div>
 
+<div class="d-grid gap-3 container">
+    <h2>Reviews :</h2>
+    <% if @reviews.any? %>
+    <% @reviews.each do |review| %>
+      <div class="card">
+          <div class="card-header"> Review </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p><%= review.comment %></p>
+        </blockquote>
+        <div class="star-rating mb-3">
+              <% 5.times do |i| %>
+                <% if i < @offer.average_rating.to_i %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+      </div>
+    </div>
+        <% end %>
+    <% else %>
+    <div class="card">
+      <div class="card-header"> Review </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>No reviews yet for this offer</p>
+        </blockquote>
+      </div>
+    </div>
+    <% end %>
+</div>
+
 
   <div class="form-actions p mb-2 d-flex gap-2 row">
     <% if current_user == @offer.user %>
@@ -38,5 +72,6 @@
     <% end %>
   </div>
 </div>
+
 
 </div>
