@@ -103,14 +103,14 @@
   border-radius: 10px;
 }
 
-.button-group {
+.form-actions {
   display: flex;
-  justify-content: center; /* center horizontally */
-  gap: 16px;               /* space between buttons */
-  flex-wrap: wrap;         /* wrap on small screens */
-  margin-top: 20px;        /* spacing from above content */
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
-.button-group .btn {
-  white-space: nowrap;     /* prevent button text from wrapping */
+.form-actions .btn {
+  white-space: nowrap;
 }
