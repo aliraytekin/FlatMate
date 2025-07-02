@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :set_offer, only: %i[new create]
+  before_action :set_offer, only: %i[new create edit update destroy]
+  before_action :set_review, only: %i[edit update destroy]
   before_action :authorize_user!, only: %i[new create]
 
   def new
@@ -13,9 +14,27 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @offer, notice: "Your review was successfully created!"
     else
-      render :new, status: :unprocessable_entity
+      @reviews = @offer.reviews.includes(:user)
+      render "offers/show", status: :unprocessable_entity
     end
   end
+
+  def edit
+  end
+
+  def update
+    if @review.update(review_params)
+      redirect_to offer_path(@offer), notice: "Review updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @review.destroy
+    redirect_to offer_path(@offer), notice: "Review deleted."
+  end
+
 
   private
 
@@ -25,6 +44,10 @@ class ReviewsController < ApplicationController
 
   def set_offer
     @offer = Offer.find(params[:offer_id])
+  end
+
+  def set_review
+    @review = @offer.reviews.find(params[:id])
   end
 
   def authorize_user!

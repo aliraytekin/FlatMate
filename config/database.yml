@@ -78,7 +78,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: airbnb_clone_production
-  username: airbnb_clone
-  password: <%= ENV["AIRBNB_CLONE_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
