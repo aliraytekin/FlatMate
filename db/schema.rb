@@ -51,10 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_02_191304) do
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
     t.integer "status", default: 0, null: false
-=======
->>>>>>> 93f81c4487911ddd3c99a0d00fd82787273d4d55
     t.index ["offer_id"], name: "index_bookings_on_offer_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -74,6 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_02_191304) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
