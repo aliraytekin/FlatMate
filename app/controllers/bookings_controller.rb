@@ -67,7 +67,6 @@ class BookingsController < ApplicationController
 
   def success
     redirect_to confirmation_booking_path(@booking), notice: "Your request to book will be confirmed by a host soon!"
-
   end
 
   def cancel
