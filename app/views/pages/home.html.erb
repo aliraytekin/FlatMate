@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg)">
+<div class="banner w-100" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg)">
   <div class="container">
     <h1>Finding an accomodation made simple!</h1>
     <p>Discover stays that fit your style and budget — from cozy homes to unique experiences — all in just a few clicks.</p>
@@ -56,10 +56,34 @@
                 <% end %>
               <% end %>
             </div>
-            <%= link_to "View", offer_path(offer), class: "btn btn-primary" %>
+          <%= link_to "View", offer_path(offer), class: "btn btn-primary" %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+
+  <% @offers.each_slice(5) do |offers_group| %>
+    <div class="dest-grid mb-3">
+      <% offers_group.each_with_index do |offer, index| %>
+        <a href="#" class="dest-card <%= 'featured' if index == 1 %>">
+          <%= cl_image_tag offer.photos.first.key, alt: "Accomodation picture" %>
+          <div class="dest-info">
+            <h3><%= offer.title %></h3>
+            <p><%= number_to_currency(offer.price_per_night) %> / night </p>
+            <p><%= offer.address %></p>
+            <div class="star-rating mb-3">
+              <% 5.times do |i| %>
+                <% if i < offer.average_rating.to_i %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
 </div>

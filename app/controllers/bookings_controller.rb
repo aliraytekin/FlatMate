@@ -1,12 +1,11 @@
 class BookingsController < ApplicationController
   before_action :set_offer, only: %i[new create]
-  before_action :set_booking, only: %i[show edit update payment success]
+  before_action :set_booking, only: %i[show edit update success]
   before_action :authorize_user!, only: %i[payment success]
 
   def index
-    @bookings = Booking.all
+    @bookings = policy_scope(Booking)
   end
-
 
   def show
   end
@@ -39,26 +38,32 @@ class BookingsController < ApplicationController
 
   def accept
     booking = Booking.find(params[:id])
-    if booking.offer.user == current_user
-      booking.accepted!
-      redirect_to bookings_path, notice: "Booking accepted."
-    else
-      redirect_to bookings_path, alert: "You are not authorised to do that"
-    end
+    authorize booking, :update_status?
+
+    booking.accepted!
+    redirect_to bookings_path, notice: "Booking accepted."
   end
 
   def refuse
     booking = Booking.find(params[:id])
-    if booking.offer.user == current_user
-      booking.refused!
-      redirect_to bookings_path, notice: "Booking cancelled."
-    else
-      redirect_to bookings_path, alert: "You are not authorised to do that"
-    end
+    authorize booking, :update_status?
+
+    booking.refused!
+    redirect_to bookings_path, notice: "Booking cancelled."
+  end
+
+  def cancel
+    booking = Booking.find(params[:id])
+    authorize booking, :cancel?
+
+    booking.cancelled!
+    redirect_to bookings_path, notice: "Booking cancelled."
   end
 
   def payment
     @booking = Booking.find(params[:id])
+    authorize @booking, :payment?
+
     @payment_intent = Stripe::PaymentIntent.create(
       amount: @booking.calculate_total_price.to_i,
       currency: 'eur',
@@ -68,17 +73,6 @@ class BookingsController < ApplicationController
 
   def success
     redirect_to confirmation_booking_path(@booking), notice: "Your request to book will be confirmed by a host soon!"
-
-  end
-
-  def cancel
-    booking = Booking.find(params[:id])
-    if booking.user = current_user
-      booking.cancelled!
-      redirect_to bookings_path, notice: "Booking cancelled."
-    else
-      redirect_to bookings_path, alert: "You are not authorised to do that"
-    end
   end
 
   def confirmation
@@ -97,6 +91,7 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+    authorize @booking
   end
 
   def authorize_user!

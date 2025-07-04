@@ -44,7 +44,7 @@ TITLES = [
 ADDRESSES = [
   "Karaköy, Istanbul, Turkey",
   "5 Rue de la Paix, 75002 Paris, France",
-  "1600 Pennsylvania Avenue NW, Washington, DC, USA",
+  "1600 Pennsylvania Avenue, DC, USA",
   "10 Downing Street, London, UK",
   "Piazza del Duomo, Milan, Italy",
   "Shibuya Crossing, Tokyo, Japan",
