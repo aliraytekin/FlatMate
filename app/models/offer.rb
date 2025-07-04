@@ -14,7 +14,8 @@ class Offer < ApplicationRecord
 
   PROPERTY_TYPES = ["Apartment", "House", "Villa", "Cabin"]
   validates :property_type, inclusion: { in: PROPERTY_TYPES }
-  validates :photos, presence: true
+  validate :must_have_at_least_one_photo
+
   include PgSearch::Model
   pg_search_scope :search_by_offers,
                   against: %i[title description],
@@ -24,5 +25,11 @@ class Offer < ApplicationRecord
 
   def average_rating
     reviews.average(:rating)&.round(2) || 0
+  end
+
+  private
+
+  def must_have_at_least_one_photo
+    errors.add(:photos, "At least a picture must be included") if photos.attached? == "false"
   end
 end
