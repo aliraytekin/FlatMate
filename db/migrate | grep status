@@ -1,0 +1,155 @@
+[33md97006b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m bug with status
+[33m171c6dc[m bug with status
+[33m93f81c4[m conflict
+[33m0dbe358[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33mfd047a8[m conflict resolved
+[33med9bbaa[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33m377c467[m[33m ([m[1;32mbug-with-status[m[33m)[m Merge pull request #35 from aliraytekin/booking-index-mod
+[33mc5b407b[m saved
+[33mb630eac[m booking dashboard
+[33m836f2b2[m recent changes
+[33mf1d8986[m Merge branch 'booking-index-mod' of github.com:aliraytekin/airbnb-clone into booking-index-mod
+[33m7a10a88[m merged conflict
+[33m2531782[m new commit
+[33mbf112e6[m[33m ([m[1;31morigin/booking-index-mod[m[33m)[m worked on improving the booking page and offer page
+[33m8a186a7[m worked on improving the booking page and offer page
+[33m84b25dc[m save schema
+[33m9463b25[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33mb23263a[m Merge pull request #33 from aliraytekin/confirmation-booking-page
+[33m0116db7[m[33m ([m[1;31morigin/confirmation-booking-page[m[33m, [m[1;32mconfirmation-booking-page[m[33m)[m Confirmation booking page, fix review name
+[33mce259ac[m Merge pull request #32 from aliraytekin/full-price
+[33m5da1030[m total price added
+[33m1cd52f8[m Merge pull request #31 from aliraytekin/full-price
+[33mebab746[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33m8027523[m total price added
+[33m9be7863[m Merge pull request #30 from aliraytekin/delete-edit-function-reviews
+[33ma38cf80[m Merge pull request #29 from aliraytekin/Flat-Form-Updated
+[33mf856e46[m[33m ([m[1;31morigin/delete-edit-function-reviews[m[33m, [m[1;32mdelete-edit-function-reviews[m[33m)[m added review display on offer page and delete and edit function, fixed the avaibilaty issue
+[33m08e11c2[m Fix cloudinary
+[33m7214df5[m Add Images Heroku
+[33md6a3f65[m  styling booking index
+[33m18c111d[m Heroku logs
+[33m12fbc63[m Merge pull request #28 from aliraytekin/map
+[33maa70403[m Map added
+[33m78afc3d[m Merge branch 'Flat-Form-Updated' of github.com:aliraytekin/airbnb-clone into Flat-Form-Updated
+[33ma60e7d3[m offers flat form update
+[33m2e88545[m merge conflict
+[33m6959d6b[m Heroku fix
+[33ma466750[m offers flat form update
+[33mc0a085f[m Heroku fix
+[33mff081bb[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33mceb1ccc[m db schema
+[33mc279f7b[m conflict
+[33m5a3d3a9[m changes
+[33mf894828[m Merge pull request #25 from aliraytekin/Bookings-Form-Front-update
+[33mb64861d[m[33m ([m[1;31morigin/Bookings-Form-Front-update[m[33m)[m Added CSS to Booking-Form
+[33m269eb35[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33m25cb3c4[m extra booking status deleted
+[33mdda0429[m Merge pull request #24 from aliraytekin/reviews
+[33m500f289[m Reviews added
+[33mb3d6021[m Edit change
+[33mc99f78c[m Status fixed
+[33md10087b[m Status fixed
+[33m5d0ddf0[m Status fixed
+[33mee21a7e[m Merge pull request #23 from aliraytekin/stripe-test
+[33m85616f7[m Merge branch 'master' into stripe-test
+[33md2ebaa0[m Migration rollback
+[33mda56ad9[m Merge pull request #22 from aliraytekin/edit-mod
+[33m0bc44aa[m Merge branch 'master' into edit-mod
+[33m6a814a6[m Stripe fixed
+[33m24a6b6b[m Stripe test
+[33m9edf7bb[m Merge pull request #21 from aliraytekin/cancel-btn-bookings
+[33m4ed4a30[m added styliing to edit page
+[33me54c053[m styling edit page
+[33m0479fc2[m styling edit page
+[33mb346247[m[33m ([m[1;31morigin/cancel-btn-bookings[m[33m, [m[1;32mcancel-btn-bookings[m[33m)[m cancel booking function
+[33m5c553cd[m Resolve merge conflict in _index.scss
+[33me274df6[m edit form change
+[33m3140ef9[m Merge pull request #20 from aliraytekin/calendar-bookign
+[33m91226c5[m fix: flashes
+[33m5a462a7[m Merge pull request #19 from aliraytekin/calendar-bookign
+[33m2d889c4[m fix: flashes
+[33m8a88c0c[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33m8ab1734[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33m4e2d909[m Fix merge
+[33mea744bc[m Merge pull request #18 from aliraytekin/home-page
+[33m40df253[m Home page finished
+[33m6399b01[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33m67ea3a0[m migration
+[33mdc02e28[m fixed the enum status issue
+[33m94a898f[m  modified schema
+[33m9cac228[m merging conflict
+[33m3fc8749[m update the destroy method
+[33m7cf0409[m fix: controller offer
+[33m6fc879d[m Launch file
+[33m230df80[m Frontend
+[33me9e8613[m Merge pull request #16 from aliraytekin/pictures-offers
+[33mb7a6a63[m Images added
+[33m896ab5e[m fix: root page
+[33mf593fc9[m fix: offer controller
+[33m0a1cf87[m fix: avatar
+[33m95ea02c[m fix: avatar
+[33m1affed7[m Merge pull request #12 from aliraytekin/bookings_index
+[33m67983cc[m Merge pull request #15 from aliraytekin/booking-update-page
+[33ma065cd3[m fixed the merge conflict in bookings#index
+[33m281f2d4[m added the edit page for Bookings
+[33m2e47a7f[m Merge pull request #14 from aliraytekin/delete-btn
+[33m88d66dd[m Merge branch 'master' into delete-btn
+[33mf241f79[m[33m ([m[1;31morigin/delete-btn[m[33m, [m[1;32mdelete-btn[m[33m)[m Add delete button for offers
+[33mfe01e7b[m Merge pull request #13 from aliraytekin/partial-form
+[33m8f0847a[m[33m ([m[1;31morigin/partial-form[m[33m)[m hide edit button if user not signed in
+[33m3f43d19[m[33m ([m[1;31morigin/bookings_index[m[33m)[m Bookings index
+[33m5cead30[m  cleaned up _form partial and created a edit button on show_page
+[33md809394[m Merge pull request #11 from aliraytekin/enum-status
+[33m501f22e[m enum done
+[33mfa2f2d8[m Merge pull request #10 from aliraytekin/search-bar
+[33mfcbbd0d[m Search bar
+[33m44ddae6[m Merge pull request #9 from aliraytekin/new-booking
+[33mb80bd49[m Booking new
+[33m9512f52[m fix: syntax controller
+[33me02478c[m new done
+[33mc3889a3[m Controller created
+[33mcce63cc[m Merge pull request #7 from aliraytekin/form-partial
+[33m709ba60[m Merge branch 'master' into form-partial
+[33md72fd46[m resolved merge conflict
+[33mc0a6508[m Merge pull request #8 from aliraytekin/homepage
+[33m80f6a86[m[33m ([m[1;31morigin/homepage[m[33m)[m Build homepage with offers display
+[33madf3776[m  add partial form
+[33m5f5a042[m Resolve conflict in offer.rb after merging master
+[33m9149f3f[m Merge pull request #6 from aliraytekin/devise
+[33m25e7411[m Logic View New
+[33mb00d426[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33ma09deb5[m New
+[33mc565dc1[m Merge pull request #5 from aliraytekin/new-offer
+[33m9085e46[m Devise
+[33m8619356[m Merge pull request #4 from aliraytekin/show_page_aref
+[33m63baad5[m show page AREF new try
+[33me6c3e5b[m fix: change code
+[33m64e90c5[m fix: change code
+[33meaeff52[m Merge branch 'master' of github.com:aliraytekin/airbnb-clone
+[33m77e1607[m fix: set_flat
+[33m33d029c[m Merge pull request #3 from aliraytekin/offers-controller
+[33m4e4fcb3[m New create
+[33m66e6537[m New create
+[33m2ee787e[m Check
+[33m6233785[m New create
+[33m2941234[m New create
+[33m53c5a62[m Controller
+[33mb6573de[m Merge pull request #2 from aliraytekin/edit-page
+[33m7959fb0[m show page aref
+[33m6bb6ffd[m updating models
+[33mbc5621e[m show page Aref
+[33md14a1d9[m added code into edit.html.erb
+[33m657d4a9[m .
+[33mc11f334[m Merge pull request #1 from aliraytekin/edit-offers
+[33mc0a68c4[m Edit offers
+[33mc248eab[m Edit offers
+[33mc7a9f6a[m Controller added
+[33mea9992b[m routes for all
+[33mda065c6[m models & validation
+[33ma36241e[m Open URI
+[33m9151df3[m Offer model
+[33mccfa99c[m Seed file
+[33mc25cd78[m Models added
+[33me0cc93a[m models airbnb
+[33mbf192e0[m Initial commit with minimal template from https://github.com/lewagon/rails-templates
