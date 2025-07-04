@@ -21,7 +21,7 @@
   <div class="row mt-5">
     <% @offers.each do |offer| %>
       <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card h-100"> 
           <% if offer.photos.attached? %>
             <div id="carouselOffer<%= offer.id %>" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
