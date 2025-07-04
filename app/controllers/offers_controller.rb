@@ -12,7 +12,8 @@ class OffersController < ApplicationController
 
   def show
     @offer = Offer.find(params[:id])
-    @reviews = @offer.reviews
+    @review = Review.new
+    @reviews = @offer.reviews.includes(:user)
   end
 
   def new
