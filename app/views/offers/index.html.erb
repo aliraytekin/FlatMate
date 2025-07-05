@@ -1,13 +1,65 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-sm-8">
-      <% @offers.each do |offer| %>
-        <h4><strong><%= offer.title %></strong></h4>
-        <p><%= offer.description %></p>
-        <p><%= "#{offer.price_per_night}€" %></p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg)">
+  <div class="container">
+    <h1>Finding an accomodation made simple!</h1>
+    <p>Discover stays that fit your style and budget — from cozy homes to unique experiences — all in just a few clicks.</p>
+    <div class="row justify-content-left">
+    <div class="col-sm-10">
+      <%= form_tag offers_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control me-2",
+              placeholder: "Search for a flat"
+          %>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
+  </div>
 </div>
 
+<div class="container mt-4">
+  <div class="row mt-5">
+    <% @offers.each do |offer| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <% if offer.photos.attached? %>
+            <div id="carouselOffer<%= offer.id %>" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% offer.photos.each_with_index do |photo, index| %>
+                  <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <%= link_to offer_path(offer) do %>
+                      <%= cl_image_tag photo.key, transformation: { width: 400, height: 250, crop: "fill" }, class: "d-block w-100" %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffer<%= offer.id %>" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselOffer<%= offer.id %>" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+          <% end %>
 
+
+          <div class="card-body">
+            <h5 class="card-title"><%= offer.title %></h5>
+            <p class="card-text"><%= offer.address %></p>
+            <p><strong><%= number_to_currency(offer.price_per_night, unit: "€") %></strong> / night</p>
+            <div class="star-rating mb-3">
+              <% 5.times do |i| %>
+                <% if i < offer.average_rating.to_i %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <%= link_to "View", offer_path(offer), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
