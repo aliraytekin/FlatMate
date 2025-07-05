@@ -54,7 +54,7 @@
         </div>
 
         <div id="edit-review-<%= review.id %>" class="collapse mt-2">
-          <%= simple_form_for [@offer, review], html: { class: "border rounded p-3" } do |f| %>
+          <%= simple_form_for [@offer, @review], html: { class: "border rounded p-3" } do |f| %>
             <%= f.input :rating, label: "Update Rating" %>
             <%= f.input :comment, label: "Update Comment" %>
             <%= f.submit "Save changes", class: "btn btn-sm btn-success" %>

@@ -8,8 +8,8 @@ class BookingPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     def resolve
       scope.joins(:offer).where(
-        'booking_user_id = :user_id OR offer.user_id = :user_id',
-        user_id: user_id
+        'bookings.user_id = :user_id OR offers.user_id = :user_id',
+        user_id: user.id
       )
     end
   end
@@ -43,6 +43,14 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def cancel?
+    record.user == user || record.offer.user == user
+  end
+
+  def success?
+    record.user == user || record.offer.user == user
+  end
+
+  def confirmation?
     record.user == user || record.offer.user == user
   end
 end

@@ -10,7 +10,7 @@ class ReviewPolicy < ApplicationPolicy
   end
 
   def create?
-    user.bookings.where(offer_id: record.offer.id).exists?
+    user.bookings.where(offer_id: record.offer.id).exists? if record.offer
   end
 
   def edit?

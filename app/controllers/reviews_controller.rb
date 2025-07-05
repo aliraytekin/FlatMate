@@ -4,6 +4,7 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
+    @review.offer = @offer
     authorize @review
   end
 
