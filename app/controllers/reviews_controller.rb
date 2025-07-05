@@ -2,6 +2,9 @@ class ReviewsController < ApplicationController
   before_action :set_offer, only: %i[new create edit update destroy]
   before_action :set_review, only: %i[edit update destroy]
 
+  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+
   def new
     @review = Review.new
     @review.offer = @offer

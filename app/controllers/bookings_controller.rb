@@ -2,6 +2,9 @@ class BookingsController < ApplicationController
   before_action :set_offer, only: %i[new create]
   before_action :set_booking, only: %i[show edit update]
 
+  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+
   def index
     @bookings = policy_scope(Booking)
   end

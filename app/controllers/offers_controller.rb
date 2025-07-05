@@ -2,6 +2,9 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_offer, only: %i[show edit update destroy]
 
+  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+
   def index
     if params[:query].present?
       @offers = Offer.search_by_offers(params[:query])
@@ -11,8 +14,11 @@ class OffersController < ApplicationController
   end
 
   def show
+    @offer = Offer.find(params[:id])
     @review = Review.new
+    @review.offer = @offer
     @reviews = @offer.reviews.includes(:user)
+    authorize @offer
   end
 
   def new
