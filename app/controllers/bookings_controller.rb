@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_offer, only: %i[new create]
   before_action :set_booking, only: %i[show edit update success]
-  before_action :authorize_user!, only: %i[payment success]
 
   def index
     @bookings = policy_scope(Booking)
@@ -92,11 +91,5 @@ class BookingsController < ApplicationController
   def set_booking
     @booking = Booking.find(params[:id])
     authorize @booking
-  end
-
-  def authorize_user!
-    unless current_user == @booking.user
-      redirect_to root_path, alert: "You are not authorized to see this page"
-    end
   end
 end
