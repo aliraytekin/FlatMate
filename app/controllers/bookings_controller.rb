@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: %i[show edit update success]
 
   def index
-    @bookings = policy_scope(Booking)
+    @bookings = Booking.all
   end
 
   def show
@@ -37,7 +37,7 @@ class BookingsController < ApplicationController
 
   def accept
     booking = Booking.find(params[:id])
-    authorize booking, :update_status?
+    # authorize booking, :update_status?
 
     booking.accepted!
     redirect_to bookings_path, notice: "Booking accepted."
@@ -45,7 +45,7 @@ class BookingsController < ApplicationController
 
   def refuse
     booking = Booking.find(params[:id])
-    authorize booking, :update_status?
+    # authorize booking, :update_status?
 
     booking.refused!
     redirect_to bookings_path, notice: "Booking cancelled."
@@ -53,7 +53,7 @@ class BookingsController < ApplicationController
 
   def cancel
     booking = Booking.find(params[:id])
-    authorize booking, :cancel?
+    # authorize booking, :cancel?
 
     booking.cancelled!
     redirect_to bookings_path, notice: "Booking cancelled."
@@ -61,7 +61,7 @@ class BookingsController < ApplicationController
 
   def payment
     @booking = Booking.find(params[:id])
-    authorize @booking, :payment?
+    # authorize @booking, :payment?
 
     @payment_intent = Stripe::PaymentIntent.create(
       amount: @booking.calculate_total_price.to_i,
@@ -90,6 +90,6 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
-    authorize @booking
+    # authorize @booking
   end
 end
