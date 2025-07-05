@@ -14,7 +14,9 @@
     <div class="dest-grid mb-3">
       <% offers_group.each_with_index do |offer, index| %>
         <a href="#" class="dest-card <%= 'featured' if index == 1 %>">
-          <%= cl_image_tag offer.photos.first.key, alt: "Accomodation picture" %>
+          <% if offer.photos.attached? %>
+            <%= cl_image_tag offer.photos.first.key, alt: "Accomodation picture" %>
+          <% end %>
           <div class="dest-info">
             <h3><%= offer.title %></h3>
             <p><%= number_to_currency(offer.price_per_night) %> / night </p>
