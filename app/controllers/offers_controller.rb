@@ -6,18 +6,18 @@ class OffersController < ApplicationController
     if params[:query].present?
       @offers = Offer.search_by_offers(params[:query])
     else
-      @offers = Offer.all
+      @offers = policy_scope(Offer)
     end
   end
 
   def show
-    @offer = Offer.find(params[:id])
     @review = Review.new
     @reviews = @offer.reviews.includes(:user)
   end
 
   def new
     @offer = Offer.new
+    authorize @offer
   end
 
   def create
@@ -54,6 +54,7 @@ class OffersController < ApplicationController
 
   def set_offer
     @offer = Offer.find(params[:id])
+    authorize @offer
   end
 
   def offers_params

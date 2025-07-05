@@ -9,4 +9,28 @@
     <p class="lead">Carefully selected flats, homes, and unique experiences — all in one place.</p>
     <%= link_to "Browse Stays", offers_path, class: "btn btn-light btn-lg mt-3 shadow" %>
   </div>
+
+  <% @offers.each_slice(5) do |offers_group| %>
+    <div class="dest-grid mb-3">
+      <% offers_group.each_with_index do |offer, index| %>
+        <a href="#" class="dest-card <%= 'featured' if index == 1 %>">
+          <%= cl_image_tag offer.photos.first.key, alt: "Accomodation picture" %>
+          <div class="dest-info">
+            <h3><%= offer.title %></h3>
+            <p><%= number_to_currency(offer.price_per_night) %> / night </p>
+            <p><%= offer.address %></p>
+            <div class="star-rating mb-3">
+              <% 5.times do |i| %>
+                <% if i < offer.average_rating.to_i %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
 </div>
