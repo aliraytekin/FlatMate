@@ -9,11 +9,13 @@
     <p class="lead">Carefully selected flats, homes, and unique experiences — all in one place.</p>
     <%= link_to "Browse Stays", offers_path, class: "btn btn-light btn-lg mt-3 shadow" %>
   </div>
+</div>
 
-  <% @offers.each_slice(5) do |offers_group| %>
+<div class="container mt-4">
+  <% @offers.first(15).each_slice(5) do |offers_group| %>
     <div class="dest-grid mb-3">
       <% offers_group.each_with_index do |offer, index| %>
-        <a href="#" class="dest-card <%= 'featured' if index == 1 %>">
+        <%= link_to offer, class: "dest-card #{'featured' if index == 1}" do %>
           <% if offer.photos.attached? %>
             <%= cl_image_tag offer.photos.first.key, alt: "Accomodation picture" %>
           <% end %>
@@ -31,7 +33,7 @@
               <% end %>
             </div>
           </div>
-        </a>
+        <% end %>
       <% end %>
     </div>
   <% end %>

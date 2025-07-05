@@ -1,6 +1,9 @@
 class BookingsController < ApplicationController
   before_action :set_offer, only: %i[new create]
-  before_action :set_booking, only: %i[show edit update success]
+  before_action :set_booking, only: %i[show edit update]
+
+  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   def index
     @bookings = Booking.all
@@ -71,17 +74,21 @@ class BookingsController < ApplicationController
   end
 
   def success
+    @booking = Booking.find(params[:id])
+    authorize @booking, :success?
     redirect_to confirmation_booking_path(@booking), notice: "Your request to book will be confirmed by a host soon!"
   end
 
   def confirmation
     @booking = Booking.find(params[:id])
+    authorize @booking, :confirmation?
   end
 
   private
 
   def set_offer
     @offer = Offer.find(params[:offer_id])
+    authorize @offer
   end
 
   def booking_params
