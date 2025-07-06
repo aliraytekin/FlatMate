@@ -1,52 +1,28 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg)">
-  <div class="container">
-    <h1>Finding an accomodation made simple!</h1>
-    <p>Discover stays that fit your style and budget — from cozy homes to unique experiences — all in just a few clicks.</p>
-    <div class="row justify-content-left">
-    <div class="col-sm-10">
-      <%= form_tag offers_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query,
-              params[:query],
-              class: "form-control me-2",
-              placeholder: "Search for a flat"
-          %>
-        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
+<div class="position-relative mt-5" style="height: 420px;">
+  <%= image_tag "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      class: "w-100 h-100 object-fit-cover rounded shadow",
+      style: "filter: brightness(0.5); object-position: center;",
+      alt: "Cozy apartment preview" %>
+
+  <div class="position-absolute top-50 start-50 translate-middle text-white text-center px-4">
+    <h2 class="display-5 fw-bold">Book your next stay in seconds</h2>
+    <p class="lead">Carefully selected flats, homes, and unique experiences — all in one place.</p>
+    <%= link_to "Browse Stays", offers_path, class: "btn btn-light btn-lg mt-3 shadow" %>
   </div>
 </div>
 
 <div class="container mt-4">
-  <div class="row mt-5">
-    <% @offers.each do |offer| %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
+  <% @offers.first(15).each_slice(5) do |offers_group| %>
+    <div class="dest-grid mb-3">
+      <% offers_group.each_with_index do |offer, index| %>
+        <%= link_to offer, class: "dest-card #{'featured' if index == 1}" do %>
           <% if offer.photos.attached? %>
-            <div id="carouselOffer<%= offer.id %>" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <% offer.photos.each_with_index do |photo, index| %>
-                  <div class="carousel-item <%= 'active' if index == 0 %>">
-                    <%= link_to offer_path(offer) do %>
-                      <%= cl_image_tag photo.key, transformation: { width: 400, height: 250, crop: "fill" }, class: "d-block w-100" %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffer<%= offer.id %>" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselOffer<%= offer.id %>" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              </button>
-            </div>
+            <%= cl_image_tag offer.photos.first.key, alt: "Accomodation picture" %>
           <% end %>
-
-
-          <div class="card-body">
-            <h5 class="card-title"><%= offer.title %></h5>
-            <p class="card-text"><%= offer.address %></p>
-            <p><strong><%= number_to_currency(offer.price_per_night, unit: "€") %></strong> / night</p>
+          <div class="dest-info">
+            <h3><%= offer.title %></h3>
+            <p><%= number_to_currency(offer.price_per_night) %> / night </p>
+            <p><%= offer.address %></p>
             <div class="star-rating mb-3">
               <% 5.times do |i| %>
                 <% if i < offer.average_rating.to_i %>
@@ -56,10 +32,9 @@
                 <% end %>
               <% end %>
             </div>
-            <%= link_to "View", offer_path(offer), class: "btn btn-primary" %>
           </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
