@@ -30,6 +30,6 @@ class Offer < ApplicationRecord
   private
 
   def must_have_at_least_one_photo
-    errors.add(:photos, "At least a picture must be included") if photos.attached? == "false"
+    errors.add(:photos, "At least a picture must be included") unless photos.attached?
   end
 end

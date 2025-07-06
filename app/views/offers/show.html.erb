@@ -85,7 +85,7 @@
     <p><%= @offer.description %></p>
 
     <div class="form-actions mb-4 d-flex gap-2">
-      <% if current_user == @offer.user %>
+      <% if policy(@offer).update? %>
         <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
         <%= button_to "Delete offer", offer_path(@offer),
             method: :delete,
