@@ -11,3 +11,4 @@ pin "flatpickr" # @4.6.13
 pin "@stripe/stripe-js", to: "@stripe--stripe-js.js" # @7.4.0pin "mapbox" # @1.0.0
 pin "mapbox-gl" # @3.1.2
 pin "process" # @2.1.0
+pin "swiper" # @11.2.10

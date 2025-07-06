@@ -1,1 +1,89 @@
-// Specific CSS for your home-page
+:root {
+      --radius-lg: 1.25rem;
+      --shadow-lg: 0 4px 24px rgba(0, 0, 0, 0.15);
+      --color-text: #ffffff;
+      --color-bg: #f5f7fa;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .dest-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 300px;
+    gap: 1rem;
+  }
+
+  .featured {
+    grid-column: span 2;
+    grid-row: span 2;
+    height: 250px;
+  }
+}
+
+.dest-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  height: 100%;
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+  display: block;
+}
+
+.dest-card:hover {
+  transform: translateY(-4px);
+}
+
+.dest-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.dest-card:hover img {
+  transform: scale(1.05);
+}
+
+.dest-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 20%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0) 80%);
+  pointer-events: none;
+}
+
+.dest-info {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  max-width: 80%;
+  z-index: 1;
+  color: var(--color-text);
+}
+
+.dest-info h3 {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.dest-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}

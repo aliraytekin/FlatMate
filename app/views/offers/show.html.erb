@@ -1,30 +1,48 @@
-<div class="banner-offer-show" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571451/pexels-photo-1571451.jpeg)">
+<div class="d-grid gap-3 container">
+  <h4><%= @offer.title %></h4>
+  <p><%= @offer.description %></p>
 
- <div class="container-show">
-    <h4 class="text-center"><strong><%= @offer.title %></strong></h4>
-    <p><%= @offer.description %></p>
+<%# <div class="d-grid gap-3 justify-content-evenly">
+  <%= cl_image_tag @offer.photos.first.key , alt: "House", width: 800, height: 400 %>
 
-    <div class="form-actions mb-4 d-flex gap-2">
-      <% if current_user == @offer.user %>
-        <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
-        <%= button_to "Delete offer", offer_path(@offer),
-            method: :delete,
-            data: { confirm: "Are you sure?" },
-            class: "btn btn-danger" %>
-      <% else %>
-        <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-primary" %>
-      <% end %>
+<div class="container">
+  <% if @offer.photos.attached? %>
+    <div id="carouselOffer<%= @offer.id %>" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% @offer.photos.each_with_index do |photo, index| %>
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <%= link_to offer_path(@offer) do %>
+              <%= cl_image_tag photo.key, transformation: { width: 400, height: 250, crop: "fill" }, class: "d-block w-100" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffer<%= @offer.id %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselOffer<%= @offer.id %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
     </div>
-  </div>
+  <% end %>
+</div>
 
+
+
+<div class="container">
   <div data-controller="map"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
     data-map-marker-value="<%= { lng: @offer.longitude, lat: @offer.latitude }.to_json %>"
     style='width: 100%; height: 300px;'>
   </div>
+</div>
 
-  <h5 class="mt-4">Reviews</h5>
-
+<div class="container">
+  <% if @offer.reviews.any? %>
+    <h5 class="mt-4">Reviews:</h5>
+  <% else %>
+    <h5 class="mt-4">There are no reviews yet.</h5>
+  <% end %>
   <% @offer.reviews.each do |review| %>
     <div class="card p-3 mb-3">
       <div class="d-flex justify-content-between align-items-center mb-1">
@@ -35,12 +53,12 @@
 
       <% if current_user == review.user %>
         <div class="d-flex gap-2">
-        <%= link_to "Edit", "#", class: "btn btn-outline-primary btn-sm", data: { bs_toggle: "collapse", bs_target: "#edit-review-#{review.id}" } %>
+          <%= link_to "Edit", "#", class: "btn btn-outline-primary btn-sm", data: { bs_toggle: "collapse", bs_target: "#edit-review-#{review.id}" } %>
           <%= button_to "Delete", offer_review_path(@offer, review), method: :delete, onclick: "return confirm('Are you sure you want to delete this review?')", class: "btn btn-outline-danger btn-sm" %>
         </div>
 
         <div id="edit-review-<%= review.id %>" class="collapse mt-2">
-          <%= simple_form_for [@offer, review], html: { class: "border rounded p-3" } do |f| %>
+          <%= simple_form_for [@offer, @review], html: { class: "border rounded p-3" } do |f| %>
             <%= f.input :rating, label: "Update Rating" %>
             <%= f.input :comment, label: "Update Comment" %>
             <%= f.submit "Save changes", class: "btn btn-sm btn-success" %>
@@ -49,8 +67,9 @@
       <% end %>
     </div>
   <% end %>
+</div>
 
-  <% unless @offer.reviews.exists?(user: current_user) %>
+  <% if policy(@review).create? && !@offer.reviews.exists?(user: current_user) %>
     <div class="mt-4">
       <h6>Leave a review:</h6>
       <%= simple_form_for [@offer, @review] do |f| %>
@@ -61,5 +80,21 @@
     </div>
   <% end %>
 
-  <%= link_to "Back to the home page", root_path, class: "btn btn-secondary mt-4" %>
+   <div class="container-show">
+    <h4 class="text-center"><strong><%= @offer.title %></strong></h4>
+    <p><%= @offer.description %></p>
+
+    <div class="form-actions mb-4 d-flex gap-2">
+      <% if policy(@offer).update? %>
+        <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
+        <%= button_to "Delete offer", offer_path(@offer),
+            method: :delete,
+            data: { confirm: "Are you sure?" },
+            class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-primary mt-4" %>
+        <%= link_to "Back to the home page", root_path, class: "btn btn-secondary mt-4" %>
+      <% end %>
+    </div>
+  </div>
 </div>
