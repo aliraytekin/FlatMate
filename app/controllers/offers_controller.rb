@@ -29,6 +29,9 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new(offers_params)
     @offer.user = current_user
+
+    authorize @offer
+
     if @offer.save
       redirect_to @offer
     else
@@ -37,9 +40,12 @@ class OffersController < ApplicationController
   end
 
   def edit
+    authorize @offer
   end
 
   def update
+    authorize @offer
+
     if @offer.update(offers_params)
       redirect_to @offer
     else
@@ -48,23 +54,20 @@ class OffersController < ApplicationController
   end
 
   def destroy
-    if @offer.user == current_user
-      @offer.destroy
-      redirect_to root_path, notice: 'Offer was successfully deleted.'
-    else
-      redirect_to root_path, alert: "You are not authorised to delete this offer"
-    end
+    authorize @offer
+
+    @offer.destroy
+    redirect_to root_path, notice: 'Offer was successfully deleted.'
   end
 
   private
 
   def set_offer
     @offer = Offer.find(params[:id])
-    authorize @offer
   end
 
   def offers_params
     params.require(:offer).permit(:title, :address, :description, :price_per_night, :number_of_bathrooms, :number_of_beds,
-                                  :guests_limit, :property_type)
+                                  :guests_limit, :property_type, photos: [])
   end
 end
