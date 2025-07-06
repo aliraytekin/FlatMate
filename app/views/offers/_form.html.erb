@@ -9,19 +9,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-3">
         <%= f.input :number_of_bathrooms %>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-3">
         <%= f.input :number_of_beds %>
       </div>
 
-      <div class="break-form-2 col-md-6">
+      <div class="break-form-2 col-md-3">
         <%= f.input :guests_limit %>
       </div>
 
-      <div class="break-form-2 col-md-6">
+      <div class="break-form-2 col-md-3">
         <%= f.input :property_type, collection: Offer::PROPERTY_TYPES, prompt: "Select a property type" %>
       </div>
     </div>
