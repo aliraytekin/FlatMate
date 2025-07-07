@@ -22,8 +22,8 @@
     </div>
   <% end %>
 
-  <h3 class="mt-5 mb-3 text-muted">Cancelled Bookings</h3>
   <% if cancelled_bookings.any? %>
+    <h2 class="mt-4 mb-4 text-muted">Cancelled Bookings &raquo;</h2>
     <div class="row">
       <% cancelled_bookings.each do |booking| %>
         <% if booking.user == current_user %>
