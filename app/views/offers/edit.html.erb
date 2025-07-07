@@ -1,14 +1,13 @@
- <div class="banner-edit" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg)">
-      <div class="row mb-3">
-        <div class="col-md-8 offset-md-2">
-          <div class="offer-form">
-            <h1 class="h4 mb-2">PROPERTY INFORMATION </h1>
-            <p class="ms-2"> You can edit your property below:</p>
-            <div class="mt-2">
-              <%= render "form", offer: @offer %>
-            </div>
-          </div>
-        </div>
+<div class="banner-edit" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg)">
+  <h1 class="h4 mb-2">PROPERTY INFORMATION </h1>
+  <p class="text-white"> You can edit your property inputs below:</p>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <div class="offer-form">
+      <div class="mt-2">
+        <%= render "form", offer: @offer %>
       </div>
     </div>
   </div>

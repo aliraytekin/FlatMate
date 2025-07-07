@@ -21,11 +21,10 @@
 }
 
 .banner-edit {
-  background-size: cover;
+  background-size: 20%;
   background-position: center;
-  padding: 50px 0;
-  height: 100vh;
-  color:white;
+  padding: 36px 0;
+  height: 15vh;
 
 }
 
@@ -40,8 +39,9 @@
 
 .banner-edit p {
   font-size: 20px;
-  font-style: italic;
-  opacity:.7;
+  opacity:.8;
+
+  text-align: center;
 }
 
 .banner-offer-show {

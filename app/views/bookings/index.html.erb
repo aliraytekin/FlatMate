@@ -9,8 +9,9 @@
 <div class="container">
   <% active_bookings = @bookings.reject(&:cancelled?) %>
   <% cancelled_bookings = @bookings.select(&:cancelled?) %>
+
   <% if active_bookings.any? %>
-    <h2 class="mt-4 mb-4">Latest Bookings >>> </h2>
+    <h2 class="mt-4 mb-4">Latest Bookings &raquo;</h2>
 
     <div class="row">
       <% active_bookings.each do |booking| %>
@@ -18,14 +19,19 @@
           <%= render partial: "booking_card", locals: { booking: booking, current_user: current_user } %>
         <% end %>
       <% end %>
+    </div>
+  <% end %>
 
+  <h3 class="mt-5 mb-3 text-muted">Cancelled Bookings</h3>
+  <% if cancelled_bookings.any? %>
+    <div class="row">
       <% cancelled_bookings.each do |booking| %>
         <% if booking.user == current_user %>
           <%= render partial: "booking_card", locals: { booking: booking, current_user: current_user } %>
         <% end %>
       <% end %>
     </div>
-  <%end%>
+  <% end%>
 
   <div class="container mt-2 text-left">
     <%= link_to "Back to home page", root_path, class: "btn btn-secondary border-2 rounded-3" %>

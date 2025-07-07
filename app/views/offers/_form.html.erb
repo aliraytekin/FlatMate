@@ -1,34 +1,23 @@
 
-<div class="container mt-3">
-  <%= simple_form_for @offer do |f| %>
-    <div class = "break-form-1">
-        <%= f.input :title %>
-        <%= f.input :description, as: :text, input_html: { rows: 4 } %>
-        <%= f.input :address %>
-        <%= f.input :price_per_night%>
-    </div>
+<div class="offers-wrap">
+      <div class="container mt-2">
+        <%= simple_form_for @offer, html: { multipart: true } do |f| %>
+          <%= f.input :title %>
+          <%= f.input :description, as: :text, input_html: { rows: 5 } %>
+          <%= f.input :address %>
+          <%= f.input :price_per_night %>
+          <%= f.input :number_of_bathrooms %>
+          <%= f.input :number_of_beds %>
+          <%= f.input :guests_limit %>
+          <%= f.input :property_type, collection: Offer::PROPERTY_TYPES, prompt: "Select a property type" %>
 
-    <div class="row">
-      <div class="col-md-3">
-        <%= f.input :number_of_bathrooms %>
+
+          <%= f.input :photos, as: :file, input_html: { multiple: true, required: true } %>
+
+          <div class="form-actions mb-2">
+            <%= f.button :submit, class: "btn btn-primary me-1" %>
+            <%= link_to "Cancel request", root_path, class: "btn btn-danger" %>
+          </div>
+        <% end %>
       </div>
-
-      <div class="col-md-3">
-        <%= f.input :number_of_beds %>
-      </div>
-
-      <div class="break-form-2 col-md-3">
-        <%= f.input :guests_limit %>
-      </div>
-
-      <div class="break-form-2 col-md-3">
-        <%= f.input :property_type, collection: Offer::PROPERTY_TYPES, prompt: "Select a property type" %>
-      </div>
-    </div>
-
-    <div class="actions d-flex gap-5 mb-3 justify-content-center">
-      <%= f.submit  class: 'btn btn-primary' %>
-      <%= link_to "Cancel Request", offer_path, class: 'btn btn-danger text-white' %>
-    </div>
-  <% end %>
 </div>

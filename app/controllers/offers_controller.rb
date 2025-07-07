@@ -32,6 +32,7 @@ class OffersController < ApplicationController
 
     authorize @offer
 
+
     if @offer.save
       redirect_to @offer
     else
