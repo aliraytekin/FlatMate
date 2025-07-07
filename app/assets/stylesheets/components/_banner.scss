@@ -21,11 +21,10 @@
 }
 
 .banner-edit {
-  background-size: cover;
+  background-size: 20%;
   background-position: center;
-  padding: 50px 0;
-  height: 100vh;
-  color:white;
+  padding: 36px 0;
+  height: 15vh;
 
 }
 
@@ -40,51 +39,10 @@
 
 .banner-edit p {
   font-size: 20px;
-  font-style: italic;
-  opacity:.7;
+  opacity:.8;
+
+  text-align: center;
 }
-
-
-.banner-active-booking {
-  background-size: cover;
-  background-position: center;
-  height: 180px;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 25px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  padding: 10px 15px;
-  margin-bottom: 5px;
-}
-
-.card-text {
- font-size: 16px;
- line-height: 1;
- color: darkgrey;
- font-style: italic;
-}
-
-.card-title {
- color: black;
-}
-
-.bookings-title {
-  opacity: 0;
-  transform: translateY(25px);
-  animation: fadeSlideIn 1s ease forwards;
-}
-
-@keyframes fadeSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 
 .banner-offer-show {
   background-size: cover;

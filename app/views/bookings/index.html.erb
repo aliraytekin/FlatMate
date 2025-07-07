@@ -1,81 +1,39 @@
 <div class="banner-active-booking" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg)">
   <h1 class="text-center mt-4 bookings-title mb-4 ">My Booking History Dashboard</h1>
   <p class="text-center mb-0 description-text fs-5">
-      Welcome <%= current_user.first_name%>, Here you can view and manage all your current and upcoming bookings with ease.
+      Welcome <%= current_user.first_name%>, here you can view and manage all your current and upcoming bookings with ease.
   </p>
 </div>
-  <div class="container">
-    <% active_bookings = @bookings.reject(&:cancelled?) %>
-    <% cancelled_bookings = @bookings.select(&:cancelled?) %>
 
-    <% if active_bookings.any? %>
-      <h2 class="mt-4">Latest Booking >>> </h2>
-      <div class="row">
-        <% active_bookings.each do |booking| %>
-          <% if booking.offer.user == current_user %>
-            <div class="col-md-6 mb-4" style="width: 25rem;">
-              <div class="border border-4 rounded-3" style="background-color: grey">
-                <h5 class="card-title mb-2 mt-2 p-3"><strong><%= booking.offer.title %></strong></h5>
-                <p class="card-text">From: <%= booking.start_date %></p>
-                <p class="card-text">To: <%= booking.end_date %></p>
-                <p class="card-text">Guests: <%= booking.number_of_guests %></p>
-                <p class="card-text">Guest name: <%= "#{booking.user.first_name} #{booking.user.last_name}" %></p>
-                <p class="card-text mb-3">Guest email: <%= booking.user.email %></p>
-                <% if booking.pending? %>
-                  <p>Do you want to accept or refuse the booking?</p>
-                  <div class="d-flex justify-content-center gap-3">
-                    <%= button_to "Accept booking", accept_booking_path(booking), method: :patch, class: "btn btn-success", data: { confirm: "Accept this booking?" } %>
-                    <%= button_to "Refuse booking", refuse_booking_path(booking), method: :patch, class: "btn btn-danger", data: { confirm: "Refuse this booking?" } %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          <% elsif booking.user == current_user %>
-            <div class="col-md-4 mb-4" style="width: 25rem;">
 
-              <div class="border border-4 rounded-3" style="background-color: grey">
-                <h5 class="card-title mb-2 mt-2 p-3"><strong><%= booking.offer.title %></strong></h5>
-                <p class="card-text">From: <%= booking.start_date %></p>
-                <p class="card-text">To: <%= booking.end_date %></p>
-                <p class="card-text">Guests: <%= booking.number_of_guests %></p>
-                <p class="card-text">Address: <%= booking.offer.address %></p>
-                <p class="card-text mb-3">Status: <span class="badge bg-secondary"><%= booking.status&.capitalize || "Pending"  %></span></p>
+<div class="container">
+  <% active_bookings = @bookings.reject(&:cancelled?) %>
+  <% cancelled_bookings = @bookings.select(&:cancelled?) %>
 
-                <% if booking.accepted? || booking.pending? %>
-                  <%= form_with url: cancel_booking_path(booking), method: :patch, local: true, data: { turbo_confirm: "Cancel this booking?" } do %>
-                    <%= submit_tag "Cancel booking", class: "btn btn-warning mt-2" %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
+  <% if active_bookings.any? %>
+    <h2 class="mt-4 mb-4">Latest Bookings &raquo;</h2>
+
+    <div class="row">
+      <% active_bookings.each do |booking| %>
+        <% if booking.offer.user == current_user || booking.user == current_user %>
+          <%= render partial: "booking_card", locals: { booking: booking, current_user: current_user } %>
         <% end %>
-      </div>
-    <% else %>
-      <p class="text-center mt-5">No active bookings yet.</p>
-    <% end %>
+      <% end %>
+    </div>
+  <% end %>
 
-    <% if cancelled_bookings.any? %>
-      <h2 class="mt-5">Cancelled Bookings</h2>
-      <div class="row">
-        <% cancelled_bookings.each do |booking| %>
-          <% if booking.user == current_user %>
-            <div class="col-md-6 mb-4" style="width: 25rem;">
-              <div class="border border-4 rounded-3" style="background-color: grey">
-                <h5 class="card-title mb-2 mt-2 p-3"><strong><%= booking.offer.title %></strong></h5>
-                <p class="card-text">From: <%= booking.start_date %></p>
-                <p class="card-text">To: <%= booking.end_date %></p>
-                <p class="card-text">Guests: <%= booking.number_of_guests %></p>
-                <p class="card-text">Address: <%= booking.offer.address %></p>
-                <p class="card-text"><span class="badge bg-secondary">Cancelled</span></p>
-                <p class="card-text mt-2">This booking was cancelled.</p>
-              </div>
-            </div>
-          <% end %>
+  <h3 class="mt-5 mb-3 text-muted">Cancelled Bookings</h3>
+  <% if cancelled_bookings.any? %>
+    <div class="row">
+      <% cancelled_bookings.each do |booking| %>
+        <% if booking.user == current_user %>
+          <%= render partial: "booking_card", locals: { booking: booking, current_user: current_user } %>
         <% end %>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end%>
+
   <div class="container mt-2 text-left">
-    <%= link_to "Back to home page", root_path, class: "btn btn-danger text-white" %>
+    <%= link_to "Back to home page", root_path, class: "btn btn-secondary border-2 rounded-3" %>
   </div>
+</div>
