@@ -27,7 +27,7 @@
 
         <% if booking.pending? %>
           <p>Do you want to accept or refuse the booking?</p>
-          <div class="d-flex justify-content-center gap-3 mt-2">
+          <div class="d-flex justify-content-center gap-3 my-2">
             <%= button_to "Accept booking", accept_booking_path(booking), method: :patch, class: "btn btn-success booking-btn-success btn-sm", data: { confirm: "Accept this booking?" } %>
             <%= button_to "Refuse booking", refuse_booking_path(booking), method: :patch, class: "btn btn-danger booking-btn-danger btn-sm", data: { confirm: "Refuse this booking?" } %>
           </div>
@@ -38,14 +38,14 @@
         <p><i class="fa-solid fa-location-dot me-1"></i> <%= booking.offer.address %></p>
         <p>
           <i class="fa-regular fa-bell me-1"></i>
-          <span class="badge bg-secondary mb-3">
+          <span class="badge bg-secondary mb-2 py-1">
             <%= booking.cancelled? ? "Cancelled" : (booking.status&.capitalize || "Pending") %>
           </span>
         </p>
 
         <% if booking.accepted? || booking.pending? %>
           <%= form_with url: cancel_booking_path(booking), method: :patch, local: true, data: { turbo_confirm: "Cancel this booking?" } do %>
-            <%= submit_tag "Cancel booking", class: "btn btn-warning" %>
+            <%= submit_tag "Cancel booking", class: "btn btn-warning my-3" %>
           <% end %>
         <% end %>
 
