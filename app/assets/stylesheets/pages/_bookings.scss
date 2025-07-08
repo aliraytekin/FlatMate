@@ -1,19 +1,40 @@
 .custom-booking-form {
   background-color: white;
   padding: 2rem;
-  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: auto;
 
   .form-control {
-    border-radius: 8px;
     padding: 10px;
   }
 
   .btn {
     margin-top: 1rem;
-    border-radius: 50px;
+  }
+
+  .btn-outline-primary {
+    background-color: transparent;
+    color: #0D6EFD;
+    border: 1px solid #0D6EFD;
+    font-weight: 400;
+
+    &:hover {
+      background-color: #0D6EFD;
+      color: white;
+    }
+  }
+
+  .btn-outline-danger {
+    background-color: transparent;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    font-weight: 400;
+
+    &:hover {
+      background-color: #dc3545;
+      color: white;
+    }
   }
 }
 
