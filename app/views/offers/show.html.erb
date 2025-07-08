@@ -75,7 +75,7 @@
       <%= simple_form_for [@offer, @review] do |f| %>
         <%= f.input :rating, input_html: { min: 1, max: 5, type: "number" } %>
         <%= f.input :comment %>
-        <%= f.submit "Submit review", class: "btn btn-primary" %>
+        <%= f.submit "Submit review", class: "btn btn-outline-success mt-2" %>
       <% end %>
     </div>
   <% end %>
@@ -92,8 +92,8 @@
             data: { confirm: "Are you sure?" },
             class: "btn btn-danger" %>
       <% else %>
-        <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-primary mt-4" %>
-        <%= link_to "Back to the home page", root_path, class: "btn btn-secondary mt-4" %>
+        <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-outline-primary me-2 mt-4" %>
+        <%= link_to "Back to the home page", root_path, class: "btn btn-outline-secondary mt-4" %>
       <% end %>
     </div>
   </div>
