@@ -10,8 +10,8 @@ class ReviewPolicy < ApplicationPolicy
   end
 
   def create?
-    puts "DEBUG record.offer_id: #{record.offer_id}"
-    puts "DEBUG user.bookings.exists?: #{user.bookings.where(offer_id: record.offer_id).exists?}"
+    return false if user.nil?
+
     user.bookings.where(offer_id: record.offer_id).exists?
   end
 
