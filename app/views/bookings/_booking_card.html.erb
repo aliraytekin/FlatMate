@@ -1,0 +1,58 @@
+<div class="col-md-4 mb-4">
+  <div class="card overflow-hidden">
+    <div class="position-relative">
+      <% if booking.offer.photos.attached? %>
+
+        <%= cl_image_tag booking.offer.photos.first.key,
+            transformation: { width: 400, height: 200, crop: "fill" }, alt: "Offer image" %>
+        <% else %>
+          <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;" >
+            <span class="text-white-50">No Image Available</span>
+          </div>
+      <% end %>
+    </div>
+
+    <div class= "card-body p-3">
+      <h5 class="card-title"><strong><%= booking.offer.title %></strong></h5>
+      <p>
+        <i class="fa-solid fa-calendar me-1"></i> From <%= booking.start_date %> &nbsp;&nbsp;
+        <i class="fa-solid fa-calendar me-1"></i> To <%= booking.end_date.strftime("%b %d, %Y") %>
+      </p>
+      <p><i class="fa-solid fa-person me-1"></i> <%= booking.number_of_guests %></p>
+
+      <% if booking.offer.user == current_user %>
+        <!-- HOST VIEW -->
+        <p><i class="fa-solid fa-user me-1"></i> <%= "#{booking.user.first_name} #{booking.user.last_name}" %></p>
+        <p><i class="fa-regular fa-envelope me-1"></i> <%= booking.user.email %></p>
+
+        <% if booking.pending? %>
+          <p>Do you want to accept or refuse the booking?</p>
+          <div class="d-flex justify-content-center gap-3 my-2">
+            <%= button_to "Accept booking", accept_booking_path(booking), method: :patch, class: "btn btn-success booking-btn-success btn-sm", data: { confirm: "Accept this booking?" } %>
+            <%= button_to "Refuse booking", refuse_booking_path(booking), method: :patch, class: "btn btn-danger booking-btn-danger btn-sm", data: { confirm: "Refuse this booking?" } %>
+          </div>
+        <% end %>
+
+      <% else %>
+        <!-- GUEST VIEW -->
+        <p><i class="fa-solid fa-location-dot me-1"></i> <%= booking.offer.address %></p>
+        <p>
+          <i class="fa-regular fa-bell me-1"></i>
+          <span class="badge bg-secondary mb-2 py-1">
+            <%= booking.cancelled? ? "Cancelled" : (booking.status&.capitalize || "Pending") %>
+          </span>
+        </p>
+
+        <% if booking.accepted? || booking.pending? %>
+          <%= form_with url: cancel_booking_path(booking), method: :patch, local: true, data: { turbo_confirm: "Cancel this booking?" } do %>
+            <%= submit_tag "Cancel booking", class: "btn btn-warning my-3" %>
+          <% end %>
+        <% end %>
+
+        <% if booking.cancelled? %>
+          <p class="card-text mt-2">This booking was cancelled.</p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

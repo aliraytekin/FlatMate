@@ -1,0 +1,123 @@
+/*banner*/
+
+.banner-active-booking {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 10px 15px;
+  margin-bottom: 5px;
+}
+
+
+.bookings-title {
+  transform: translateY(25px);
+  animation: fadeSlideIn 2s ease forwards;
+  font-size: 70px;
+  opacity: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  color:white;
+}
+
+
+.description-text{
+  color:white;
+  font-family: Arial, Helvetica, sans-serif;
+  transform: translateY(25px);
+  animation: fadeSlideIn 2s ease forwards;
+}
+
+/*card product*/
+
+.card {
+  position:relative;
+  display: flex;
+  width: 80%;
+  height: 390px;
+  background-color: whitesmoke;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  justify-content: space-between;
+  border-radius: 0px;
+  border: 1px solid black
+}
+
+.card h5 {
+ font-size: 13px;
+ font-weight: bold;
+ margin: 0;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+.card p {
+  font-size: 11px;
+  line-height: 1.0;
+  margin-bottom: 0;
+  margin-top: 12px;
+  color:black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-body {
+  padding: 16px;
+  margin-top: 0px;
+}
+
+
+.btn-warning {
+  font-size: 9px;
+  line-height: 1.4;
+  font-weight: lighter;
+  opacity: 0.8;
+  color:black;
+  background-color: #ffc107;
+  border-color: #ffc107;
+  transition: opacity 0.3s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-warning:hover {
+  opacity: 1;
+  background: #ffc107;
+}
+.booking-btn-success {
+  font-size: 9px;
+  opacity: 0.8;
+}
+
+.booking-btn-success:hover {
+  opacity: 1;
+  background:#1EDD88;
+}
+
+.booking-btn-danger {
+  font-size: 9px;
+  opacity: 0.8;
+}
+
+.booking-btn-danger:hover {
+  opacity: 1;
+  background:#FD1015;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.btn-secondary {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.btn-secondary:hover {
+  opacity: 1;
+}

@@ -1,16 +1,23 @@
 class ReviewsController < ApplicationController
   before_action :set_offer, only: %i[new create edit update destroy]
   before_action :set_review, only: %i[edit update destroy]
-  before_action :authorize_user!, only: %i[new create]
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   def new
     @review = Review.new
+    @review.offer = @offer
+    authorize @review
   end
 
   def create
     @review = Review.new(review_params)
     @review.offer = @offer
     @review.user = current_user
+
+    authorize @review
+
     if @review.save
       redirect_to @offer, notice: "Your review was successfully created!"
     else
@@ -20,9 +27,12 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    authorize @review
   end
 
   def update
+    authorize @review
+
     if @review.update(review_params)
       redirect_to offer_path(@offer), notice: "Review updated."
     else
@@ -31,10 +41,11 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    authorize @review
+
     @review.destroy
     redirect_to offer_path(@offer), notice: "Review deleted."
   end
-
 
   private
 
@@ -48,15 +59,5 @@ class ReviewsController < ApplicationController
 
   def set_review
     @review = @offer.reviews.find(params[:id])
-  end
-
-  def authorize_user!
-    offer = Offer.find(params[:offer_id])
-
-    has_booking = Booking.exists?(offer: offer, user: current_user)
-
-    unless has_booking
-      redirect_to root_path, alert: "You are not authorized to see this page!"
-    end
   end
 end

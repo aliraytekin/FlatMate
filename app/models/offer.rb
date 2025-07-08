@@ -14,7 +14,7 @@ class Offer < ApplicationRecord
 
   PROPERTY_TYPES = ["Apartment", "House", "Villa", "Cabin"]
   validates :property_type, inclusion: { in: PROPERTY_TYPES }
-  validate :must_have_at_least_one_photo
+  validate :must_have_at_least_one_photo, on: :create
 
   include PgSearch::Model
   pg_search_scope :search_by_offers,
@@ -30,6 +30,8 @@ class Offer < ApplicationRecord
   private
 
   def must_have_at_least_one_photo
-    errors.add(:photos, "At least a picture must be included") if photos.attached? == "false"
+    return if photos.attached?
+
+    errors.add(:photos, "At least a picture must be included")
   end
 end
