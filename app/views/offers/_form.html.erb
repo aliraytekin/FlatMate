@@ -12,7 +12,7 @@
           <%= f.input :property_type, collection: Offer::PROPERTY_TYPES, prompt: "Select a property type" %>
 
 
-          <%= f.input :photos, as: :file, input_html: { multiple: true, required: true } %>
+          <%= f.input :photos, as: :file, input_html: { multiple: true } %>
 
           <div class="form-actions mb-2">
             <%= f.button :submit, class: "btn btn-primary me-1" %>
