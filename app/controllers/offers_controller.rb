@@ -31,8 +31,6 @@ class OffersController < ApplicationController
     @offer.user = current_user
 
     authorize @offer
-
-
     if @offer.save
       redirect_to @offer
     else
@@ -46,8 +44,12 @@ class OffersController < ApplicationController
 
   def update
     authorize @offer
+    if params[:offer][:photos].is_a?(Array) && params[:offer][:photos].any? { |p| p.is_a?(ActionDispatch::Http::UploadedFile)}
+      @offer.photos.purge
+      @offer.photos.attach(params[:offer][:photos])
+    end
 
-    if @offer.update(offers_params)
+    if @offer.update(offers_params.except(:photos))
       redirect_to @offer
     else
       render :edit, status: :unprocessable_entity
