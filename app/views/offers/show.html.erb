@@ -14,7 +14,7 @@
         <% @offer.photos.each_with_index do |photo, index| %>
           <div class="carousel-item <%= 'active' if index == 0 %>">
             <%= link_to offer_path(@offer) do %>
-              <%= cl_image_tag photo.key, transformation: { height: 450, width: 450, crop: "limit" }, class: "d-block w-100"%>
+              <%= cl_image_tag photo.key, transformation: { height: 600, width: 600, crop: "fit" }, class: "d-block w-100"%>
             <% end %>
           </div>
         <% end %>
