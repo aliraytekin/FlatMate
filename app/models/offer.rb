@@ -18,7 +18,7 @@ class Offer < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_offers,
-                  against: %i[title description],
+                  against: %i[title description address],
                   using: {
                     tsearch: { prefix: true }
                   }

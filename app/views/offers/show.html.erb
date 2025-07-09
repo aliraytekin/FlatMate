@@ -1,7 +1,9 @@
 <div class="d-grid gap-3 container">
-  <h4><%= @offer.title %></h4>
-  <p><%= @offer.description %></p>
 
+
+<div class="container mt-5">
+  <h4><%= @offer.title %></h4>
+</div>
 <%# <div class="d-grid gap-3 justify-content-evenly">
   <%= cl_image_tag @offer.photos.first.key , alt: "House", width: 800, height: 400 %>
 
@@ -12,7 +14,7 @@
         <% @offer.photos.each_with_index do |photo, index| %>
           <div class="carousel-item <%= 'active' if index == 0 %>">
             <%= link_to offer_path(@offer) do %>
-              <%= cl_image_tag photo.key, transformation: { width: 400, height: 250, crop: "fill" }, class: "d-block w-100" %>
+              <%= cl_image_tag photo.key, transformation: { height: 450, width: 450, crop: "limit" }, class: "d-block w-100" %>
             <% end %>
           </div>
         <% end %>
@@ -79,6 +81,28 @@
       <% end %>
     </div>
   <% end %>
+
+
+
+<div class="container-show">
+
+<h4 class="text-center"><strong> Details of the Flat </strong></h4>
+<p> Address: <%= @offer.address %></p>
+<p> Price per night: <%= @offer.price_per_night %></p>
+<p> Number of beds: <%= @offer.number_of_beds %></p>
+<p> Number of bathroom: <%= @offer.number_of_bathrooms %></p>
+<div class="star-rating mb-3"> Rating :
+              <% 5.times do |i| %>
+                <% if i < @offer.average_rating.to_i %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+</div>
+
+
 
    <div class="container-show">
     <h4 class="text-center"><strong><%= @offer.title %></strong></h4>
