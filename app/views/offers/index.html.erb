@@ -46,13 +46,16 @@
           <div class="card-body">
             <h5 class="card-title"><%= offer.title %></h5>
             <p class="card-text"><%= offer.address %></p>
-            <p><strong><%= number_to_currency(offer.price_per_night, unit: "€") %></strong> / night</p>
+            <p><strong><%= number_to_currency(offer.price_per_night.to_i,
+              precision: offer.price_per_night.to_i == offer.price_per_night ? 0 : 2) %></strong> / night</p>
             <div class="star-rating mb-3">
-              <% 5.times do |i| %>
-                <% if i < offer.average_rating.to_i %>
-                  <i class="fas fa-star"></i>
-                <% else %>
-                  <i class="far fa-star"></i>
+              <% if offer.reviews.any? %>
+                <% 5.times do |i| %>
+                  <% if i < offer.average_rating.to_i %>
+                    <i class="fas fa-star"></i>
+                  <% else %>
+                    <i class="far fa-star"></i>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>

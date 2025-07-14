@@ -1,5 +1,3 @@
-/*banner*/
-
 .banner-active-booking {
   background-size: cover;
   background-position: center;
@@ -31,18 +29,22 @@
   animation: fadeSlideIn 2s ease forwards;
 }
 
-/*card product*/
-
 .card {
   position: relative;
   display: flex;
-  width: 80%;
+  width: 96%;
   height: 390px;
   background-color: whitesmoke;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
   justify-content: space-between;
-  border-radius: 0px;
+  border-radius: 1.25rem;
   border: 1px solid black;
+
+}
+
+.card img {
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
 }
 
 .card h5 {
