@@ -21,14 +21,17 @@
           <% end %>
           <div class="dest-info">
             <h3><%= offer.title %></h3>
-            <p><%= number_to_currency(offer.price_per_night) %> / night </p>
+            <p><%= number_to_currency(offer.price_per_night.to_i,
+              precision: offer.price_per_night.to_i == offer.price_per_night ? 0 : 2) %> / night </p>
             <p><%= offer.address %></p>
             <div class="star-rating mb-3">
-              <% 5.times do |i| %>
-                <% if i < offer.average_rating.to_i %>
-                  <i class="fas fa-star"></i>
-                <% else %>
-                  <i class="far fa-star"></i>
+              <% if offer.reviews.any? %>
+                <% 5.times do |i| %>
+                  <% if i < offer.average_rating.to_i %>
+                    <i class="fas fa-star"></i>
+                  <% else %>
+                    <i class="far fa-star"></i>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>

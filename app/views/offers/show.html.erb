@@ -29,8 +29,6 @@
   <% end %>
 </div>
 
-
-
 <div class="container">
   <div data-controller="map"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
@@ -41,7 +39,15 @@
 
 <div class="container">
   <% if @offer.reviews.any? %>
-    <h5 class="mt-4">Reviews:</h5>
+    <div class="star-rating mb-3"> Rating :
+              <% 5.times do |i| %>
+                <% if i < @offer.average_rating.to_i %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
   <% else %>
     <h5 class="mt-4">There are no reviews yet.</h5>
   <% end %>
@@ -83,7 +89,6 @@
   <% end %>
 
 
-
 <div class="container-show">
 
 <h4 class="text-center"><strong> Details of the Flat </strong></h4>
@@ -91,15 +96,6 @@
 <p> Price per night: <%= @offer.price_per_night %></p>
 <p> Number of beds: <%= @offer.number_of_beds %></p>
 <p> Number of bathroom: <%= @offer.number_of_bathrooms %></p>
-<div class="star-rating mb-3"> Rating :
-              <% 5.times do |i| %>
-                <% if i < @offer.average_rating.to_i %>
-                  <i class="fas fa-star"></i>
-                <% else %>
-                  <i class="far fa-star"></i>
-                <% end %>
-              <% end %>
-            </div>
 </div>
 
 
