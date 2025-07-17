@@ -1,6 +1,8 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :offer
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by, through: :favorites, source: :user
   validates :start_date, :end_date, :number_of_guests, presence: true
   validates :number_of_guests, numericality: { only_integer: true, greater_than: 0 }
   validate :overlapping_dates

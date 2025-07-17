@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "favorite-button" do %>
+  <div id="favorite-button">
+    <%= button_to offer_favorites_path(@offer), method: :post, form: { data: { turbo_stream: true } }, class: "btn" do %>
+      <i class="fa-regular fa-heart" style="color:red;"></i>
+    <% end %>
+  </div>
+<% end %>

@@ -1,120 +1,131 @@
-<div class="d-grid gap-3 container">
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2><%= @offer.title %></h2>
 
+    <div id="favorite-button">
+      <% if user_signed_in? %>
+        <% if current_user.favorites.none?(offer: @offer) %>
+          <%= button_to offer_favorites_path(@offer), method: :post, form: { data: { turbo_stream: true } }, class: "btn p-0 border-0 bg-transparent" do %>
+            <i class="fa-regular fa-heart" style="color:red;"></i>
+          <% end %>
+        <% else %>
+          <%= button_to offer_favorites_path(@offer), method: :delete, data: { turbo_method: :delete }, form: { data: { turbo_stream: true } }, class: "btn p-0 border-0 bg-transparent" do %>
+            <i class="fa-solid fa-heart" style="color: red;"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
-<div class="container mt-5">
-  <h4><%= @offer.title %></h4>
-</div>
-<%# <div class="d-grid gap-3 justify-content-evenly">
-  <%= cl_image_tag @offer.photos.first.key , alt: "House", width: 800, height: 400 %>
+  <div class="row g-2">
+    <div class="col-md-6">
+      <div class="image-wrapper h-100">
+        <% if @offer.photos.attached? %>
+          <%= cl_image_tag @offer.photos.first.key, transformation: { height: 600, width: 600, crop: "fill", gravity: "auto" }, class: "img-fluid rounded w-100 h-100 object-fit-cover" %>
+        <% end %>
+      </div>
+    </div>
 
-<div class="container">
-  <% if @offer.photos.attached? %>
-    <div id="carouselOffer<%= @offer.id %>" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <% @offer.photos.each_with_index do |photo, index| %>
-          <div class="carousel-item <%= 'active' if index == 0 %>">
-            <%= link_to offer_path(@offer) do %>
-              <%= cl_image_tag photo.key, transformation: { height: 600, width: 600, crop: "fit" }, class: "d-block w-100"%>
-            <% end %>
+    <div class="col-md-6 h-75">
+      <div class="row g-2">
+        <% @offer.photos[1, 4].each_with_index do |photo, index| %>
+          <div class="col-6">
+            <div class="image-wrapper h-100">
+              <%= cl_image_tag photo.key, transformation: { height: 300, width: 300, crop: "fill", gravity: "auto" }, class: "img-fluid w-100 h-100 object-fit-cover image-grid" %>
+            </div>
           </div>
         <% end %>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffer<%= @offer.id %>" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselOffer<%= @offer.id %>" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      </button>
     </div>
-  <% end %>
-</div>
 
-<div class="container">
-  <div data-controller="map"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-    data-map-marker-value="<%= { lng: @offer.longitude, lat: @offer.latitude }.to_json %>"
-    style='width: 100%; height: 300px;'>
-  </div>
-</div>
+    <div class="row">
+      <div class="col-md-6 p-0">
+        <div class="ms-1">
 
-<div class="container">
-  <% if @offer.reviews.any? %>
-    <div class="star-rating mb-3"> Rating :
-              <% 5.times do |i| %>
-                <% if i < @offer.average_rating.to_i %>
-                  <i class="fas fa-star"></i>
-                <% else %>
-                  <i class="far fa-star"></i>
-                <% end %>
+          <div data-controller="map"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+            data-map-marker-value="<%= { lng: @offer.longitude, lat: @offer.latitude }.to_json %>"
+            style='width: 100%; height: 300px; border-radius: 12px;'
+            class="mt-4 mb-4">
+          </div>
+
+          <div class="container-show">
+            <h4 class="text-center"><strong> Details of the Flat </strong></h4>
+            <p> Address: <%= @offer.address %></p>
+            <p> Price per night: <%= @offer.price_per_night %></p>
+            <p> Number of beds: <%= @offer.number_of_beds %></p>
+            <p> Number of bathroom: <%= @offer.number_of_bathrooms %></p>
+          </div>
+
+          <% if @offer.reviews.any? %>
+            <div class="star-rating mb-3"> Rating :
+                      <% 5.times do |i| %>
+                        <% if i < @offer.average_rating.to_i %>
+                          <i class="fas fa-star"></i>
+                        <% else %>
+                          <i class="far fa-star"></i>
+                        <% end %>
+                      <% end %>
+                    </div>
+          <% else %>
+            <h5 class="mt-4">There are no reviews yet.</h5>
+          <% end %>
+          <% @offer.reviews.each do |review| %>
+            <div class="card p-3 mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <strong><%= review.user.first_name.capitalize %> <%= review.user.last_name.capitalize %></strong>
+                <span class="badge bg-success">Rating: <%= review.rating %>/5</span>
+              </div>
+              <p class="mb-2"><%= review.comment %></p>
+
+              <% if current_user == review.user %>
+                <div class="d-flex gap-2">
+                  <%= link_to "Edit", "#", class: "btn btn-outline-primary btn-sm", data: { bs_toggle: "collapse", bs_target: "#edit-review-#{review.id}" } %>
+                  <%= button_to "Delete", offer_review_path(@offer, review), method: :delete, onclick: "return confirm('Are you sure you want to delete this review?')", class: "btn btn-outline-danger btn-sm" %>
+                </div>
+
+                <div id="edit-review-<%= review.id %>" class="collapse mt-2">
+                  <%= simple_form_for [@offer, @review], html: { class: "border rounded p-3" } do |f| %>
+                    <%= f.input :rating, label: "Update Rating" %>
+                    <%= f.input :comment, label: "Update Comment" %>
+                    <%= f.submit "Save changes", class: "btn btn-sm btn-success" %>
+                  <% end %>
+                </div>
               <% end %>
             </div>
-  <% else %>
-    <h5 class="mt-4">There are no reviews yet.</h5>
-  <% end %>
-  <% @offer.reviews.each do |review| %>
-    <div class="card p-3 mb-3">
-      <div class="d-flex justify-content-between align-items-center mb-1">
-        <strong><%= review.user.first_name.capitalize %> <%= review.user.last_name.capitalize %></strong>
-        <span class="badge bg-success">Rating: <%= review.rating %>/5</span>
-      </div>
-      <p class="mb-2"><%= review.comment %></p>
-
-      <% if current_user == review.user %>
-        <div class="d-flex gap-2">
-          <%= link_to "Edit", "#", class: "btn btn-outline-primary btn-sm", data: { bs_toggle: "collapse", bs_target: "#edit-review-#{review.id}" } %>
-          <%= button_to "Delete", offer_review_path(@offer, review), method: :delete, onclick: "return confirm('Are you sure you want to delete this review?')", class: "btn btn-outline-danger btn-sm" %>
-        </div>
-
-        <div id="edit-review-<%= review.id %>" class="collapse mt-2">
-          <%= simple_form_for [@offer, @review], html: { class: "border rounded p-3" } do |f| %>
-            <%= f.input :rating, label: "Update Rating" %>
-            <%= f.input :comment, label: "Update Comment" %>
-            <%= f.submit "Save changes", class: "btn btn-sm btn-success" %>
           <% end %>
+
+
+          <% if policy(@review).create? && !@offer.reviews.exists?(user: current_user) %>
+            <div class="mt-4">
+              <h6>Leave a review:</h6>
+              <%= simple_form_for [@offer, @review] do |f| %>
+                <%= f.input :rating, input_html: { min: 1, max: 5, type: "number" } %>
+                <%= f.input :comment %>
+                <%= f.submit "Submit review", class: "btn btn-outline-success mt-2" %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <div class="form-actions mb-4 d-flex gap-2">
+            <% if policy(@offer).update? %>
+              <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
+              <%= button_to "Delete offer", offer_path(@offer),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" },
+                  class: "btn btn-danger" %>
+            <% end %>
+          </div>
         </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+      </div>
 
-  <% if policy(@review).create? && !@offer.reviews.exists?(user: current_user) %>
-    <div class="mt-4">
-      <h6>Leave a review:</h6>
-      <%= simple_form_for [@offer, @review] do |f| %>
-        <%= f.input :rating, input_html: { min: 1, max: 5, type: "number" } %>
-        <%= f.input :comment %>
-        <%= f.submit "Submit review", class: "btn btn-outline-success mt-2" %>
-      <% end %>
-    </div>
-  <% end %>
-
-
-<div class="container-show">
-
-<h4 class="text-center"><strong> Details of the Flat </strong></h4>
-<p> Address: <%= @offer.address %></p>
-<p> Price per night: <%= @offer.price_per_night %></p>
-<p> Number of beds: <%= @offer.number_of_beds %></p>
-<p> Number of bathroom: <%= @offer.number_of_bathrooms %></p>
-</div>
-
-
-
-   <div class="container-show">
-    <h4 class="text-center"><strong><%= @offer.title %></strong></h4>
-    <p><%= @offer.description %></p>
-
-    <div class="form-actions mb-4 d-flex gap-2">
-      <% if policy(@offer).update? %>
-        <%= link_to "Edit Offer", edit_offer_path(@offer), class: "btn btn-primary" %>
-        <%= button_to "Delete offer", offer_path(@offer),
-            method: :delete,
-            data: { confirm: "Are you sure?" },
-            class: "btn btn-danger" %>
-      <% else %>
-        <%= link_to "Book this flat", new_offer_booking_path(@offer), class: "btn btn-outline-primary me-2 mt-4" %>
-        <%= link_to "Back to the home page", root_path, class: "btn btn-outline-secondary mt-4" %>
-      <% end %>
+      <div class="col-md-6">
+        <% if user_signed_in? %>
+          <%= render 'bookings/form', booking: @booking, offer: @offer %>
+        <% else %>
+          <h4 class="form-heading text-center mt-4" style="position: sticky; top: 30%; z-index: 10;">Please sign up or login in to book this flat</h4>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
