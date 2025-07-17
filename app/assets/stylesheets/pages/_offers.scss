@@ -62,3 +62,18 @@
     }
   }
 }
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.image-grid {
+  height: 400px;
+  width: 100%;
+  min-height: 300px;
+}
+
+.image-wrapper {
+  border-radius: 9px;
+  overflow: hidden;
+}

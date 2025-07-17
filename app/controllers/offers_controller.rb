@@ -17,6 +17,8 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
     @review = Review.new
     @review.offer = @offer
+    @booking = Booking.new
+    @booking.offer = @offer
     @reviews = @offer.reviews.includes(:user)
     authorize @offer
   end

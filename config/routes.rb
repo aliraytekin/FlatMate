@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :offers do
     resources :reviews, only: %i[new create edit update destroy]
     resources :bookings, only: %i[new create]
+    resources :favorites, only: %i[create destroy]
   end
+
+  resources :favorites, only: %i[index]
 
   resources :bookings, only: %i[index show edit update] do
     member do

@@ -11,12 +11,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "New flat", new_offer_path, class: "btn btn-outline-primary me-2 mt-1" %>
-          </li>
           <% if controller_name == "offers" && action_name == "show" %>
-            <li class="nav-item">
-              <%= link_to "Book this flat", new_offer_booking_path(offer), class: "btn btn-outline-primary me-2 mt-1" %>
+            <li class="nav-item mx-2 m-top-2">
+              <%= link_to "Book this flat", new_offer_booking_path(offer), class: "simple-button-navbar me-2 mt-1" %>
+            </li>
+          <% else %>
+            <li class="nav-item m-top-2 me-2">
+              <%= link_to "New flat", new_offer_path, class: "shining-button" %>
             </li>
           <% end %>
 
@@ -32,16 +33,19 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "See Bookings", bookings_path, class: "dropdown-item" %>
+              <%# <%= link_to "See Favorites", favorites_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
-          <li class="nav-item">
-            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-primary me-2" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-primary me-2" %>
-          </li>
+          <div class="auth-buttons">
+            <li class="nav-item">
+              <%= link_to "Sign up", new_user_registration_path, class: "signup-button me-2" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log in", new_user_session_path, class: "login-button me-2" %>
+            </li>
+          </div>
         <% end %>
       </ul>
     </div>
